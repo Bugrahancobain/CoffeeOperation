@@ -1,0 +1,120 @@
+.blog {
+    text-align: center;
+    margin: 50px 0 0 0;
+}
+
+.blogBox {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    position: relative; /* İçinde pozisyonlama yapılacak */
+    margin-bottom: 25px;
+}
+
+.blogImage {
+    position: relative; /* Mutlak pozisyonlama için gerekli */
+    width: 30%;
+    margin-top: 50px;
+    height: 55vh;
+    padding: 10% 1%;
+    font-size: 25px;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    border-radius: 24px;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+/* Karartma efektinin olduğu bölüm */
+.blogImage::before {
+    content: ''; /* Boş içerik oluştur */
+    position: absolute; /* Mutlak pozisyonlama */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Hafif karartma */
+    opacity: 0; /* Başlangıçta görünmez */
+    transition: opacity 0.3s ease; /* Geçiş efekti */
+    border-radius: 24px;
+}
+
+/* Hover olduğunda karartma efekti */
+.blogImage:hover::before {
+    opacity: 1; /* Hover olduğunda görünür hale getir */
+    border-radius: 24px;
+
+}
+
+/* Metin stilini korumak için metni konumlandırın */
+.blogImage span {
+    position: relative; /* Metin için konumlandırma */
+    z-index: 1; /* Metnin karartma katmanının üstünde görünmesi için */
+}
+.blogImage p {
+    font-size: 16px;
+    margin-top: 30px;
+    position: relative; /* Metin için konumlandırma */
+    z-index: 1; /* Metnin karartma katmanının üstünde görünmesi için */
+}
+
+.blogLinkButtonDiv {
+    margin-top: 50px;
+}
+
+.blogLinkButton {
+    text-align: center;
+    margin: 50px !important;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-size: 24px;
+    border: none;
+    text-decoration: none;
+    border-radius: 16px;
+}
+
+.blogPageImage{
+    position: relative; /* Mutlak pozisyonlama için gerekli */
+    width: 30%;
+    margin-top: 50px;
+    height: 45vh;
+    padding-top: 5%;
+    font-size: 25px;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    border-radius: 24px;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.blogPageImage::before {
+    content: ''; /* Boş içerik oluştur */
+    position: absolute; /* Mutlak pozisyonlama */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Hafif karartma */
+    opacity: 0; /* Başlangıçta görünmez */
+    transition: opacity 0.3s ease; /* Geçiş efekti */
+    border-radius: 24px;
+}
+
+/* Hover olduğunda karartma efekti */
+.blogPageImage:hover::before {
+    opacity: 1; /* Hover olduğunda görünür hale getir */
+    border-radius: 24px;
+
+}
+
+/* Metin stilini korumak için metni konumlandırın */
+.blogPageImage span, .blogPageImage p {
+    position: relative; /* Metin için konumlandırma */
+    z-index: 1; /* Metnin karartma katmanının üstünde görünmesi için */
+}

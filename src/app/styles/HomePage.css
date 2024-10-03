@@ -1,0 +1,59 @@
+.homePage {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .banner {
+    position: relative;
+    width: 97%;
+    height: 100%;
+    margin: 20px;
+  }
+  
+  .bannerImage {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+  }
+  
+  .bannerText {
+    position: absolute;
+    bottom: 20px; /* Alt kısmından 20px yukarıda başlar */
+    left: 30px;   /* Sol taraftan 20px sağa kayar */
+    color: white;
+    font-size: 50px;
+    background-color: transparent !important;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column; /* Yazıları dikey olarak hizalar */
+  }
+  
+  .bannerText div {
+    background-color: transparent !important;
+    margin-bottom: 10px; /* Her yazı arasında 10px boşluk bırakır */
+  }
+
+  .whyCoffeeOp{
+    text-align: center;
+    align-items: center;
+    margin: 50px 20px 100px 20px;
+  }
+  .whyTitle{
+    margin: 20px 0;
+  }
+  
+  .whyContext{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .whyText{
+    width: 20%;
+    margin: 20px;
+  }
+
+  .whyText h2{
+    margin-bottom: 20px;
+  }

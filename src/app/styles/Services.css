@@ -1,0 +1,113 @@
+.services {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.servicesBox {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    position: relative; /* İçinde pozisyonlama yapılacak */
+}
+
+.servicesImage {
+    position: relative; /* Mutlak pozisyonlama için gerekli */
+    width: 30%;
+    margin-top: 50px;
+    height: 95vh;
+    padding-top: 10%;
+    font-size: 25px;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    border-radius: 24px;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+/* Karartma efektinin olduğu bölüm */
+.servicesImage::before {
+    content: ''; /* Boş içerik oluştur */
+    position: absolute; /* Mutlak pozisyonlama */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Hafif karartma */
+    opacity: 0; /* Başlangıçta görünmez */
+    transition: opacity 0.3s ease; /* Geçiş efekti */
+    border-radius: 24px;
+}
+
+/* Hover olduğunda karartma efekti */
+.servicesImage:hover::before {
+    opacity: 1; /* Hover olduğunda görünür hale getir */
+    border-radius: 24px;
+
+}
+
+/* Metin stilini korumak için metni konumlandırın */
+.servicesImage span {
+    position: relative; /* Metin için konumlandırma */
+    z-index: 1; /* Metnin karartma katmanının üstünde görünmesi için */
+}
+
+.servicesLinkButtonDiv {
+    margin-top: 50px;
+}
+
+.servicesLinkButton {
+    text-align: center;
+    margin: 50px !important;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-size: 24px;
+    border: none;
+    text-decoration: none;
+    border-radius: 16px;
+}
+
+.servicesPageImage{
+    position: relative; /* Mutlak pozisyonlama için gerekli */
+    width: 30%;
+    margin-top: 50px;
+    height: 45vh;
+    padding-top: 5%;
+    font-size: 25px;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    border-radius: 24px;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.servicesPageImage::before {
+    content: ''; /* Boş içerik oluştur */
+    position: absolute; /* Mutlak pozisyonlama */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Hafif karartma */
+    opacity: 0; /* Başlangıçta görünmez */
+    transition: opacity 0.3s ease; /* Geçiş efekti */
+    border-radius: 24px;
+}
+
+/* Hover olduğunda karartma efekti */
+.servicesPageImage:hover::before {
+    opacity: 1; /* Hover olduğunda görünür hale getir */
+    border-radius: 24px;
+
+}
+
+/* Metin stilini korumak için metni konumlandırın */
+.servicesPageImage span, .servicesPageImage p {
+    position: relative; /* Metin için konumlandırma */
+    z-index: 1; /* Metnin karartma katmanının üstünde görünmesi için */
+}

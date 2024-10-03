@@ -1,0 +1,60 @@
+.contactPageMain{
+    background-color: rgba(69,104,61,255);
+    height: 120vh;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    padding: 5% 10%;
+    color: white;
+}
+.contactPageContext input{
+    min-width: 200px;
+}
+
+.contactPageContext textarea{
+    min-width: 200px;
+}
+
+.contactPageText h1, .contactPageText p{
+    margin: 10px;
+}
+
+#contactPageForm, .contactPageForm{
+    height: max-content;
+}
+
+.contactPageDiv{
+    display: flex;
+}
+
+.contactPageContext{
+    display: flex;
+    flex-direction: column;
+}
+
+.contactPageContext input, .contactPageContext label{
+    height: 30px;
+    margin: 10px;
+}
+
+.contactPageContext textarea{
+    height: 75px;
+    padding: 10px;
+    resize: none;
+    font-size: 12px;
+    margin: 10px;
+}
+
+.contactPageBtnDiv{
+    text-align: center;
+}
+
+.contactPageBtn{
+    background-color: rgba(254,231,174,255);
+    width: 150px;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+}
