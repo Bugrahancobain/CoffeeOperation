@@ -1,0 +1,112 @@
+.equipment-page {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #f5f5f5;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+
+.category {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.category:hover {
+    background-color: #e0e0e0;
+}
+
+.category.active {
+    background-color: #d0d0d0;
+    font-weight: bold;
+}
+
+.accordion {
+    margin-top: 10px;
+}
+
+.accordion-header {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+
+.accordion-header:hover {
+    background-color: #d0d0d0;
+}
+
+.brands {
+    padding-left: 10px; /* İçeriği biraz sola yasla */
+}
+
+.brand {
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.brand:hover {
+    background-color: #d0d0d0;
+}
+
+.brand.active {
+    background-color: #d0d0d0;
+    font-weight: bold;
+}
+
+.product-display {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.product-display h2 {
+    margin-bottom: 20px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.5s ease;
+
+}
+
+.product-card:hover {
+    transform: scale(1.1); /* %5 büyüme */
+}
+
+.product-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover; /* Resimleri ortala ve cover yap */
+}
+
+.product-card h3 {
+    padding: 10px 0;
+    font-size: 16px;
+}

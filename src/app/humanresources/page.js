@@ -1,12 +1,11 @@
 "use client";
 import React from 'react';
-import "../styles/ContactPage.css";
+import "../styles/Resources.css";
 import emailjs from 'emailjs-com';
 import Footer from '../components/Footer';
 
 // EmailJS'yi init et
 emailjs.init('zIQlNA5cRr2I2AzmV');
-
 
 function page() {
     const handleJobSubmit = (e) => {
@@ -16,13 +15,16 @@ function page() {
             surname: e.target.surname.value,
             email: e.target.email.value,
             phone: e.target.phone.value,
-            subject: e.target.subject.value,
-            message: e.target.message.value
+            brandname: e.target.brandname.value,
+            pozition: e.target.pozition.value,
+            city: e.target.city.value,
+            carieer: e.target.carieer.value,
         };
 
-        // EmailJS ile verileri gönderme
-        sendEmail(formData);
+        // İş başvurusu formunu gönderme
+        sendEmail(formData, "template_87yjdwl");
     };
+
     const handleHumanSubmit = (e) => {
         e.preventDefault();
         const formData = {
@@ -30,140 +32,145 @@ function page() {
             surname: e.target.surname.value,
             email: e.target.email.value,
             phone: e.target.phone.value,
-            subject: e.target.subject.value,
-            message: e.target.message.value
+            brandname: e.target.brandname.value,
+            pozition: e.target.pozition.value,
+            city: e.target.city.value,
+            carieer: e.target.carieer.value,
         };
 
-        // EmailJS ile verileri gönderme
-        sendEmail(formData);
+        // İşveren desteği formunu gönderme
+        sendEmail(formData, "template_87yjdwl");
     };
 
-    const sendEmail = (formData) => {
-        emailjs.send("service_va6xi8m", "template_bef99fe", {
+    const sendEmail = (formData, templateId) => {
+        emailjs.send("service_va6xi8m", templateId, {
             name: formData.name,
             surname: formData.surname,
             email: formData.email,
             phone: formData.phone,
-            subject: formData.subject,
-            message: formData.message
+            brandname: formData.brandname,
+            pozition: formData.pozition,
+            city: formData.city,
+            carieer: formData.carieer
         }).then(response => {
             alert("Mesaj başarıyla gönderildi!");
         }).catch(error => {
             alert("Mesaj gönderilemedi. Lütfen tekrar deneyin.");
         });
     };
+
     return (
         <div>
-            <div className='contactPageMain' style={{ marginTop: 0 }}>
-                <div className='contactPageText'>
-                    <h1>İş Arıyorum!</h1>
-                    <p>Yanda bulunan formu doldurup iş başvurusunda bulunabilirsiniz.</p>
-                </div>
-                <div className='contactPageForm'>
-                    <form id="contactPageForm" onSubmit={handleJobSubmit}>
-                        <div className='contactPageDiv'>
-                            <div className='contactPageContext'>
-                                <label htmlFor="name">İsim*</label>
-                                <input type="text" id="name" name="name" required />
+            <div className='resourcesPage'>
+                <div className='resourcesPageMain' style={{ marginTop: 0 }}>
+                    <div className='resourcesPageText'>
+                        <h1>Pozisyon Arayışı!</h1>
+                    </div>
+                    <div className='resourcesPageForm'>
+                        <form id="resourcesPageForm" onSubmit={handleJobSubmit}>
+                            <div className='resourcesPageDiv'>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="name">İsim*</label>
+                                    <input type="text" id="name" name="name" required />
+                                </div>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="surname">Soyisim*</label>
+                                    <input type="text" id="surname" name="surname" required />
+                                </div>
                             </div>
-                            <div className='contactPageContext'>
-                                <label htmlFor="surname">Soyisim*</label>
-                                <input type="text" id="surname" name="surname" required />
+                            <div className='resourcesPageDiv'>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="email">E-Posta*</label>
+                                    <input type="email" id="email" name="email" required />
+                                </div>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="phone">Telefon*</label>
+                                    <input type="tel" id="phone" name="phone" required />
+                                </div>
                             </div>
-                        </div>
-                        <div className='contactPageDiv'>
-                            <div className='contactPageContext'>
-                                <label htmlFor="email">E-Posta*</label>
-                                <input type="email" id="email" name="email" required />
+                            <div className='resourcesPageDiv'>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="brandname">Doğum Tarihi*</label>
+                                    <input type="text" id="brandname" name="brandname" required />
+                                </div>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="pozition">Başvurulan Pozisyon*</label>
+                                    <input type="text" id="pozition" name="pozition" required />
+                                </div>
                             </div>
-                            <div className='contactPageContext'>
-                                <label htmlFor="phone">Telefon*</label>
-                                <input type="tel" id="phone" name="phone" required />
+                            <div className='resourcesPageDivv'>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="city">Bulunduğunuz Şehir*</label>
+                                    <input type="text" id="city" name="city" required />
+                                </div>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="carieer">İş Tecrübeleriniz*</label>
+                                    <textarea placeholder='Mesajınızı Buraya Yazabilirsiniz.' id="carieer" name="carieer" required></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div className='contactPageDiv'>
-                            <div className='contactPageContext'>
-                                <label htmlFor="number">Doğum Tarihi*</label>
-                                <input type="number" id="age" name="age" required />
+                            <div className='resourcesPageBtnDiv'>
+                                <button type="submit" className='resourcesPageBtn'>Gönder</button>
                             </div>
-                            <div className='contactPageContext'>
-                                <label htmlFor="text">Başvurulan Pozisyon*</label>
-                                <input type="text" id="pozition" name="pozition" required />
-                            </div>
-                        </div>
-                        <div className='contactPageDivv'>
-                            <div className='contactPageContext'>
-                                <label htmlFor="city">Bulunduğunuz Şehir*</label>
-                                <input type="text" id="city" name="city" required />
-                            </div>
-                            <div className='contactPageContext'>
-                                <label htmlFor="carieer">İş Tecrübeleriniz*</label>
-                                <textarea placeholder='Mesajınızı Buraya Yazabilirsiniz.' id="carieer" name="carieer" required></textarea>
-                            </div>
-                        </div>
-                        <div className='contactPageBtnDiv'>
-                            <button type="submit" className='contactPageBtn'>Gönder</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div><div className='contactPageMain' style={{ marginTop: 0, backgroundColor: "rgba(254,231,174,255)", color: "black" }}>
-                <div className='contactPageText'>
-                    <h1>Eleman Arıyorum!</h1>
-                    <p>Yanda bulunan formu doldurup eleman arayışında bulunabilirsiniz.</p>
-                </div>
-                <div className='contactPageForm'>
-                    <form id="contactPageForm" onSubmit={handleHumanSubmit}>
-                        <div className='contactPageDiv'>
-                            <div className='contactPageContext'>
-                                <label htmlFor="name">Yetkili İsim Soyisim*</label>
-                                <input type="text" id="name" name="name" required />
-                            </div>
-                            <div className='contactPageContext'>
-                                <label htmlFor="city">Bulunduğunuz Şehir*</label>
-                                <input type="text" id="city" name="city" required />
-                            </div>
-                        </div>
-                        <div className='contactPageDiv'>
-                            <div className='contactPageContext'>
-                                <label htmlFor="email">E-Posta*</label>
-                                <input type="email" id="email" name="email" required />
-                            </div>
-                            <div className='contactPageContext'>
-                                <label htmlFor="phone">Telefon*</label>
-                                <input type="tel" id="phone" name="phone" required />
-                            </div>
-                        </div>
-                        <div className='contactPageDiv'>
-                            <div className='contactPageContext'>
-                                <label htmlFor="name">İşetme İsmi*</label>
-                                <input type="text" id="name" name="name" required />
-                            </div>
-                            <div className='contactPageContext'>
-                                <label htmlFor="text">Aranan Pozisyon*</label>
-                                <input type="text" id="pozition" name="pozition" required />
-                            </div>
-                        </div>
-                        <div className='contactPageDivv'>
-                            <div className='contactPageContext'>
-                                <label htmlFor="city">Bulunduğunuz Şehir*</label>
-                                <input type="text" id="city" name="city" required />
-                            </div>
-                            <div className='contactPageContext'>
-                                <label htmlFor="message">Belirtmek istediğiniz diğer konular*</label>
-                                <textarea placeholder='Mesajınızı Buraya Yazabilirsiniz.' id="message" name="message" required></textarea>
-                            </div>
-                        </div>
-                        <div className='contactPageBtnDiv'>
-                            <button type="submit" className='contactPageBtn' style={{ backgroundColor: "rgba(69,104,61,255)", color: "white" }}>Gönder</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
 
+                <div className='resourcesPageMain'>
+                    <div className='resourcesPageText'>
+                        <h1>İşveren Desteği!</h1>
+                    </div>
+                    <div className='resourcesPageForm'>
+                        <form id="resourcesPageForm" onSubmit={handleHumanSubmit}>
+                            <div className='resourcesPageDiv'>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="name">Yetkili İsim*</label>
+                                    <input type="text" id="name" name="name" required />
+                                </div>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="surname">Yetkili Soyisim*</label>
+                                    <input type="text" id="surname" name="surname" required />
+                                </div>
+                            </div>
+                            <div className='resourcesPageDiv'>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="email">E-Posta*</label>
+                                    <input type="email" id="email" name="email" required />
+                                </div>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="phone">Telefon*</label>
+                                    <input type="tel" id="phone" name="phone" required />
+                                </div>
+                            </div>
+                            <div className='resourcesPageDiv'>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="brandname">İşletme İsmi*</label>
+                                    <input type="text" id="brandname" name="brandname" required />
+                                </div>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="pozition">Aranan Pozisyon*</label>
+                                    <input type="text" id="pozition" name="pozition" required />
+                                </div>
+                            </div>
+                            <div className='resourcesPageDivv'>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="city">Bulunduğunuz Şehir*</label>
+                                    <input type="text" id="city" name="city" required />
+                                </div>
+                                <div className='resourcesPageContext'>
+                                    <label htmlFor="carieer">Belirtmek istediğiniz diğer konular*</label>
+                                    <textarea placeholder='Mesajınızı Buraya Yazabilirsiniz.' id="carieer" name="carieer" required></textarea>
+                                </div>
+                            </div>
+                            <div className='resourcesPageBtnDiv'>
+                                <button type="submit" className='resourcesPageBtn'>Gönder</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <Footer />
         </div>
-    )
+    );
 }
 
-export default page
+export default page;

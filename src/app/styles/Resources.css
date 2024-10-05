@@ -1,44 +1,48 @@
-.contactPageMain{
+.resourcesPage{
+    display: flex;
+}
+
+.resourcesPageMain{
     background-color: rgba(69,104,61,255);
-    height: max-content;
+    height: 120vh;
     width: 100vw;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    margin-top: 50px;
-    padding: 5% 10%;
+    padding: 5% 5%;
     color: white;
 }
-.contactPageContext input{
+.resourcesPageContext input{
     min-width: 200px;
 }
 
-.contactPageContext textarea{
+.resourcesPageContext textarea{
     min-width: 200px;
 }
 
-.contactPageText h1, .contactPageText p{
+.resourcesPageText h1, .resourcesPageText p{
     margin: 10px;
 }
 
-#contactPageForm, .contactPageForm{
+#resourcesPageForm, .resourcesPageForm{
     height: max-content;
 }
 
-.contactPageDiv{
+.resourcesPageDiv{
     display: flex;
 }
 
-.contactPageContext{
+.resourcesPageContext{
     display: flex;
     flex-direction: column;
 }
 
-.contactPageContext input, .contactPageContext label{
+.resourcesPageContext input, .resourcesPageContext label{
     height: 30px;
     margin: 10px;
 }
 
-.contactPageContext textarea{
+.resourcesPageContext textarea{
     height: 75px;
     padding: 10px;
     resize: none;
@@ -46,11 +50,11 @@
     margin: 10px;
 }
 
-.contactPageBtnDiv{
+.resourcesPageBtnDiv{
     text-align: center;
 }
 
-.contactPageBtn{
+.resourcesPageBtn{
     background-color: rgba(254,231,174,255);
     width: 150px;
     border: none;

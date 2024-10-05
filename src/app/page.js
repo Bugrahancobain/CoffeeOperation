@@ -8,6 +8,7 @@ import Services from './components/Services';
 import Products from './components/Products';
 import Contact from './components/Contact';
 import Referances from './components/Referances';
+import Participations from './components/Participations';
 
 export default function HomePage() {
   return (
@@ -25,6 +26,7 @@ export default function HomePage() {
       <Services />
       <Products />
       <Referances />
+      <Participations />
       <Contact />
       <Footer />
     </div>

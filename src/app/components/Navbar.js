@@ -9,7 +9,7 @@ function Navbar() {
         <div className='navbar'>
             <div>
                 <Link className='navbarLink' href="/">
-                    <Image className='navbarImage' src={CoffeeOperation} alt="CoffeeOperation" />
+                    <Image className='navbarImage' src="/coffeeOperation.jpeg" width={300} height={200} alt=" CoffeeOperation" />
                 </Link>
             </div>
             <div className='navbarLinks'>
@@ -18,7 +18,7 @@ function Navbar() {
                 <Link className='navbarLink' href="/services">Hizmetlerimiz</Link>
                 <Link className='navbarLink' href="/referances">Referanslarımız</Link>
                 <Link className='navbarLink' href="/blog">Blog</Link>
-                <Link className='navbarLink' href="/humanresources">İnsan Kaynakları</Link>
+                <Link className='navbarLink' href="/humanresources">Kariyer</Link>
                 <Link className='navbarLink' href="/contact">İletişim</Link>
             </div>
         </div>

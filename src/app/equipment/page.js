@@ -1,46 +1,30 @@
 "use client";
 import React, { useState } from 'react';
-import "../styles/ProductsPage.css";
+import "../styles/Equipment.css";
 import Footer from '../components/Footer';
 
 const categories = [
-    { id: 1, name: 'Güney Amerika Kahveleri' },
-    { id: 2, name: 'Asya Kahveleri' },
-    { id: 3, name: 'Arabica Çekirdekleri' },
-    { id: 4, name: 'Türk Kahveleri' },
-    { id: 5, name: 'Şuruplar' },
+    { id: 1, name: 'Espresso Makineleri' },
+    { id: 2, name: 'Filtre Kahve Makineleri' },
+    { id: 3, name: 'Kahve Grinderleri' },
     // İhtiyacınıza göre daha fazla kategori ekleyebilirsiniz
 ];
 
 const products = {
-    'Güney Amerika Kahveleri': [
-        { id: 1, name: 'Brezilya Santos', image: '/kahvepaketi.jpeg', brand: 'Brezilya' },
-        { id: 2, name: 'Kolombiya Supremo', image: '/kahvepaketi.jpeg', brand: 'Kolombiya' },
+    'Espresso Makineleri': [
+        { id: 1, name: 'Lamarzocco Makinesi', image: '/lamarzocco.webp', brand: 'Lamarzocco' },
+        { id: 2, name: 'Cimbali Makinesi', image: '/cimbalimachine.webp', brand: 'Cimbali' },
         // Daha fazla ürün ekleyebilirsiniz
     ],
-    'Asya Kahveleri': [
-        { id: 3, name: 'Sumatra Mandheling', image: '/kahvepaketi.jpeg', brand: 'Sumatra' },
-        { id: 4, name: 'Vietnam Robusta', image: '/kahvepaketi.jpeg', brand: 'Vietnam' },
+    'Filtre Kahve Makineleri': [
+        { id: 3, name: 'Makine 3', image: '/simbo.png', brand: 'Brand A' },
+        { id: 4, name: 'Makine 4', image: '/sunbean.jpeg', brand: 'Brand B' },
         // Daha fazla ürün ekleyebilirsiniz
     ],
-    'Arabica Çekirdekleri': [
-        { id: 5, name: 'Yemen Mocca', image: '/kahvepaketi.jpeg', brand: 'Yemen' },
-        { id: 6, name: 'Etiyopya Yirgacheffe', image: '/kahvepaketi.jpeg', brand: 'Etiyopya' },
-        // Daha fazla ürün ekleyebilirsiniz
-    ],
-    'Türk Kahveleri': [
-        { id: 7, name: 'Çekirdek Türk Kahvesi', image: '/kahvepaketi.jpeg', brand: 'Türkiye' },
-        { id: 8, name: 'Kavrulmuş Türk Kahvesi', image: '/kahvepaketi.jpeg', brand: 'Türkiye' },
-        // Daha fazla ürün ekleyebilirsiniz
-    ],
-    'Şuruplar': [
-        { id: 9, name: 'Vanilya Şurubu', image: '/surup.webp', brand: 'Şurup Markası A' },
-        { id: 10, name: 'Caramel Şurubu', image: '/surup.webp', brand: 'Şurup Markası B' },
-        // Daha fazla ürün ekleyebilirsiniz
-    ],
+    // Diğer kategoriler için ürünler ekleyebilirsiniz
 };
 
-function CoffeePage() {
+function EquipmentPage() {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [showAll, setShowAll] = useState(true);
     const [selectedBrand, setSelectedBrand] = useState(null);
@@ -73,7 +57,7 @@ function CoffeePage() {
 
     return (
         <div>
-            <div className="coffee-page">
+            <div className="equipment-page">
                 <div className="sidebar">
                     <h2>Kategoriler</h2>
                     <div
@@ -93,40 +77,38 @@ function CoffeePage() {
                             {/* Kategoriye tıklandığında markaları göster */}
                             {brandsVisibility[category.name] && (
                                 <div className="brands">
-                                    {/* Burada markaları tanımlayabilirsiniz. Örneğin: */}
-                                    {category.name === 'Güney Amerika Kahveleri' && (
+                                    {category.name === 'Espresso Makineleri' && (
                                         <>
                                             <div
-                                                className={`brand ${selectedBrand === 'Brezilya' ? 'active' : ''}`}
-                                                onClick={() => handleBrandClick('Brezilya')}
+                                                className={`brand ${selectedBrand === 'Lamarzocco' ? 'active' : ''}`}
+                                                onClick={() => handleBrandClick('Lamarzocco')}
                                             >
-                                                Brezilya
+                                                Lamarzocco
                                             </div>
                                             <div
-                                                className={`brand ${selectedBrand === 'Kolombiya' ? 'active' : ''}`}
-                                                onClick={() => handleBrandClick('Kolombiya')}
+                                                className={`brand ${selectedBrand === 'Cimbali' ? 'active' : ''}`}
+                                                onClick={() => handleBrandClick('Cimbali')}
                                             >
-                                                Kolombiya
+                                                Cimbali
                                             </div>
                                         </>
                                     )}
-                                    {category.name === 'Asya Kahveleri' && (
+                                    {category.name === 'Filtre Kahve Makineleri' && (
                                         <>
                                             <div
-                                                className={`brand ${selectedBrand === 'Sumatra' ? 'active' : ''}`}
-                                                onClick={() => handleBrandClick('Sumatra')}
+                                                className={`brand ${selectedBrand === 'Brand A' ? 'active' : ''}`}
+                                                onClick={() => handleBrandClick('Brand A')}
                                             >
-                                                Sumatra
+                                                Brand A
                                             </div>
                                             <div
-                                                className={`brand ${selectedBrand === 'Vietnam' ? 'active' : ''}`}
-                                                onClick={() => handleBrandClick('Vietnam')}
+                                                className={`brand ${selectedBrand === 'Brand B' ? 'active' : ''}`}
+                                                onClick={() => handleBrandClick('Brand B')}
                                             >
-                                                Vietnam
+                                                Brand B
                                             </div>
                                         </>
                                     )}
-                                    {/* Diğer kategoriler için markaları buraya ekleyin */}
                                 </div>
                             )}
                         </div>
@@ -143,10 +125,11 @@ function CoffeePage() {
                         ))}
                     </div>
                 </div>
+
             </div>
             <Footer />
         </div>
     );
 }
 
-export default CoffeePage;
+export default EquipmentPage;

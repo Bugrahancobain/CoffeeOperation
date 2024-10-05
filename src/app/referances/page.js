@@ -10,7 +10,7 @@ import Footer from '../components/Footer'
 
 function pages() {
     return (
-        <div>
+        <div className='refMain'>
             <div className='refTitle'>
                 <h1>Referanslarımız</h1>
             </div>

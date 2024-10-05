@@ -25,6 +25,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Navbar />
