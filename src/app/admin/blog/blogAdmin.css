@@ -1,0 +1,81 @@
+.blogAdmin {
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+input, textarea {
+    width: 80%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    height: 100px; /* Yüksekliği ayarlayın */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.postsList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.postItem {
+    width: 80%;
+    margin: 10px 0;
+    padding: 10px;
+    color: white; /* Metin rengi beyaz */
+    background-color: rgba(0, 0, 0, 0.7); /* Arka plan rengi */
+    border-radius: 10px;
+    background-size: cover; /* Resmin boyutunu ayarla */
+    background-position: center; /* Resmin ortasını seç */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.postItem:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Hover durumunda arka plan rengini karart */
+}
+
+.postContent {
+    margin-top: 10px;
+}
+
+#editor {
+    height: 300px; /* Yükseklik */
+    border: 1px solid #ccc; /* Kenar Çizgisi */
+    margin-bottom: 20px; /* Alt Boşluk */
+}
+
+/* Quill editörüne ait genel stil ayarları */
+.ql-toolbar {
+    border: 1px solid #ccc; /* Araç Çubuğu Kenar Çizgisi */
+    border-bottom: none; /* Alt Kenarı yok et */
+}
+
+.ql-container {
+    border: 1px solid #ccc; /* İçerik Alanı Kenar Çizgisi */
+    border-top: none; /* Üst Kenarı yok et */
+    min-height: 300px; /* Minimum Yükseklik */
+    width: 100%;
+}

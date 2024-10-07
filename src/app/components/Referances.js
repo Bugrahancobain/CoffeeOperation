@@ -32,6 +32,10 @@ const images = [
     {
         src: '/yirmikahve.jpg',
         link: 'https://www.instagram.com/20kahve/',
+    },
+    {
+        src: '/veis.jpg',
+        link: 'https://www.instagram.com/veisdondurmasi/',
     }
 ];
 

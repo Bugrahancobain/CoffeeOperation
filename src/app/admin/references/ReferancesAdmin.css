@@ -1,0 +1,147 @@
+/* Ana yapıyı düzenleme */
+.container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* Sidebar stili */
+  .sidebar {
+    width: 250px !important;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    position: fixed; /* Sidebar'ın sayfanın soluna sabitlenmesi için */
+    top: 0;
+    left: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+
+  }
+  
+  .sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #444;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .sidebar ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .sidebar ul li:hover {
+    background-color: #555;
+  }
+  
+  /* Main content stili */
+  .mainContent {
+    margin-left: 270px; /* Sidebar'a yer bırakmak için */
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* İçerikleri ortalar */
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  /* Input alanlarını ortalamak için */
+  .addReference input {
+    align-items: center;
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    display: block;
+    text-align: center;
+  }
+  
+  .addReference button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .addReference button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Referansların listesi */
+  .referencesList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .referenceItem {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .referenceItem img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Edit işlemi için */
+  .editReference {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .editReference input {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    display: block;
+    text-align: center;
+  }
+  
+  .editReference button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .editReference button:hover {
+    background-color: #218838;
+  }
+  
+  .addRefBtn{
+    text-align: center;
+  }
+  .exitBtn:hover{
+    background-color: red !important;
+  }

@@ -1,34 +1,52 @@
-import React from 'react'
-import "../styles/Services.css"
-import latte from "../../../public/latte.webp";
-import danisman from "../../../public/danişman.webp";
-import architect from "../../../public/architect.webp";
-import "../styles/Blog.css"
+// src/app/blog/page.js
+"use client";
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { database } from '../../../firebase';
+import { ref, onValue } from 'firebase/database';
+import "../styles/Blog.css";
 import Footer from '../components/Footer';
 
-function page() {
+function BlogPage() {
+    const [posts, setPosts] = useState([]);
+    const router = useRouter();
+
+    useEffect(() => {
+        const postsRef = ref(database, 'posts');
+        onValue(postsRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                const postsArray = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+                console.log(postsArray); // postsArray'yi konsola yazdırın
+                setPosts(postsArray);
+            } else {
+                console.error('No data available'); // Veri yoksa hata mesajı yazdırın
+            }
+        });
+    }, []);
+
+
+
     return (
         <div className='blog'>
             <div className="blogTitle">
                 <h1>Blog</h1>
             </div>
             <div className="blogBox">
-                <div className='blogImage' style={{ backgroundImage: `url(${latte.src})` }}>
-                    <span>Selam</span>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod doloribus odio consectetur dolorum soluta vel minima quibusdam consequuntur rerum qui.</p>
-                </div>
-                <div className='blogImage' style={{ backgroundImage: `url(${danisman.src})` }}>
-                    <span>Bugun Kahve</span>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum consequuntur amet quisquam mollitia illum, iste sit. Labore inventore molestias alias!</p>
-                </div>
-                <div className='blogImage' style={{ backgroundImage: `url(${architect.src})` }}>
-                    <span>Su Mimarisi</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi consectetur officiis possimus non similique consequatur nulla, nihil nostrum atque?</p>
-                </div>
+                {posts.map((post) => (
+                    <div
+                        key={post.id}
+                        className='blogImage'
+                        style={{ backgroundImage: `url(${post.imageUrl})` }}
+                        onClick={() => router.push(`/blog/${post.id}`)} // Yönlendirme
+                    >
+                        <span>{post.title}</span>
+                    </div>
+                ))}
             </div>
             <Footer />
         </div>
-    )
+    );
 }
 
-export default page
+export default BlogPage;

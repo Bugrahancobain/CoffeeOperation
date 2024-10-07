@@ -8,7 +8,7 @@
   
   .slider-wrapper {
     display: flex;
-    width: calc(15vw * 12); /* 6 fotoğraf + 6 duplicate */
+    width: calc(15vw * 14 ); /* 6 fotoğraf + 6 duplicate */
   }
   
   .slider-item {

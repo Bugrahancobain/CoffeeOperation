@@ -12,15 +12,25 @@ function Services() {
                 <h1>Hizmetlerimiz</h1>
             </div>
             <div className="servicesBox">
-                <div className='servicesImage' style={{ backgroundImage: `url(${latte.src})` }}>
-                    <span>Eğitim</span>
-                </div>
-                <div className='servicesImage' style={{ backgroundImage: `url(${danisman.src})` }}>
+                <Link href="/education" className='servicesImage' style={{ backgroundImage: `url(${latte.src})`, textAlign: "center" }}>
+                    <span style={{ marginBottom: "200px" }}>Eğitim</span>
+                    <br />
+                    <br />
+                    <br />
+                </Link>
+                <Link href="/consultancy" className='servicesImage' style={{ backgroundImage: `url(${danisman.src})` }}>
                     <span>Danışmanlık</span>
-                </div>
-                <div className='servicesImage' style={{ backgroundImage: `url(${architect.src})` }}>
+                    <br />
+                    <br />
+                    <br />
+                </Link>
+                <Link href="/architectureSupport" className='servicesImage' style={{ backgroundImage: `url(${architect.src})` }}>
                     <span>Mimari Destek</span>
-                </div>
+                    <br />
+                    <br />
+                    <br />
+
+                </Link>
             </div>
             <div className='servicesLinkButtonDiv'>
                 <Link className='servicesLinkButton' href="/services">TÜM HİZMETLERİMİZ</Link>

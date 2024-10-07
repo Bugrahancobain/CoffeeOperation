@@ -7,7 +7,7 @@ import { FaFacebookSquare } from "react-icons/fa";
 function Footer() {
     const thisYear = new Date().getFullYear();
     return (
-        <div>
+        <div className='footerMain'>
             <div className='footer'>© Coffee Operation {thisYear}. ALL RIGHTS RESERVED.</div>
             <div className='socialIcons'>
                 <a href="#">

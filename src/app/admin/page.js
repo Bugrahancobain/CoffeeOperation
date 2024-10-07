@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // next/navigation'dan import ediyoruz
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebase"; // firebase.js dosyasından auth'u import ediyoruz
+import "./styles/AdminPanel.css";
+import ".//references/ReferancesAdmin.css";
+import AdminNavbar from "./adminComponent/AdminNavbar";
 
 export default function Admin() {
     const router = useRouter(); // next/navigation'dan gelen router
@@ -23,11 +26,15 @@ export default function Admin() {
     if (loading) {
         return <div>Loading...</div>; // Yükleme ekranı
     }
-
     return (
         <div>
-            <h1>Admin Panel</h1>
-            {/* Admin panel içeriği */}
+
+            <div className="adminPanel">
+                <AdminNavbar />
+                <main className="content">
+                    <h1 className="adminHomeTitle">Admin Paneline Hoş Geldiniz.</h1>
+                </main>
+            </div>
         </div>
     );
 }
