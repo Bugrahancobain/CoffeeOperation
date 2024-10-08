@@ -1,40 +1,9 @@
-"use client";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; // next/navigation'dan import ediyoruz
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../../firebase"; // firebase.js dosyasından auth'u import ediyoruz
-import "./styles/AdminPanel.css";
-import ".//references/ReferancesAdmin.css";
-import AdminNavbar from "./adminComponent/AdminNavbar";
+import React from 'react'
 
-export default function Admin() {
-    const router = useRouter(); // next/navigation'dan gelen router
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                router.push("/login"); // Kullanıcı yoksa login sayfasına yönlendir
-            } else {
-                setLoading(false); // Kullanıcı varsa yükleme bitiyor
-            }
-        });
-
-        return () => unsubscribe(); // Temizleme işlemi
-    }, [router]);
-
-    if (loading) {
-        return <div>Loading...</div>; // Yükleme ekranı
-    }
+function page() {
     return (
-        <div>
-
-            <div className="adminPanel">
-                <AdminNavbar />
-                <main className="content">
-                    <h1 className="adminHomeTitle">Admin Paneline Hoş Geldiniz.</h1>
-                </main>
-            </div>
-        </div>
-    );
+        <div>page</div>
+    )
 }
+
+export default page

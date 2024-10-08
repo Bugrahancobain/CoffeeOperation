@@ -48,12 +48,39 @@ function AdminEquipmentPage() {
             .catch((error) => alert("Kategori eklenirken bir hata oluştu: " + error.message));
     };
 
+    const updateCategory = (category) => {
+        const categoryRef = ref(database, `categories/${category}`);
+        update(categoryRef, { name: editedCategoryName })
+            .catch((error) => console.error("Kategori güncellenirken hata:", error));
+        setEditingCategory(null);
+    };
+
+    const deleteCategory = (category) => {
+        const categoryRef = ref(database, `categories/${category}`);
+        remove(categoryRef)
+            .catch((error) => console.error("Kategori silinirken hata:", error));
+    };
+
+
     const addBrand = () => {
         if (!selectedCategory || newBrand.trim() === '') return;
         const brandRef = ref(database, `categories/${selectedCategory}/brands/${newBrand}`);
         set(brandRef, { name: newBrand })
             .then(() => setNewBrand(''))
             .catch((error) => console.error("Marka eklenirken hata:", error));
+    };
+
+    const updateBrand = (category, brand) => {
+        const brandRef = ref(database, `categories/${category}/brands/${brand}`);
+        update(brandRef, editedBrandName)
+            .catch((error) => console.error("Marka güncellenirken hata:", error));
+        setEditingBrand(null);
+    };
+
+    const deleteBrand = (category, brand) => {
+        const brandRef = ref(database, `categories/${category}/brands/${brand}`);
+        remove(brandRef)
+            .catch((error) => console.error("Marka silinirken hata:", error));
     };
 
     const addProduct = () => {
@@ -94,31 +121,8 @@ function AdminEquipmentPage() {
         setEditProductId(null);
     };
 
-    const updateCategory = (category) => {
-        const categoryRef = ref(database, `categories/${category}`);
-        update(categoryRef, editedCategoryName)
-            .catch((error) => console.error("Kategori güncellenirken hata:", error));
-        setEditingCategory(null);
-    };
 
-    const deleteCategory = (category) => {
-        const categoryRef = ref(database, `categories/${category}`);
-        remove(categoryRef)
-            .catch((error) => console.error("Kategori silinirken hata:", error));
-    };
 
-    const updateBrand = (category, brand) => {
-        const brandRef = ref(database, `categories/${category}/brands/${brand}`);
-        update(brandRef, editedBrandName)
-            .catch((error) => console.error("Marka güncellenirken hata:", error));
-        setEditingBrand(null);
-    };
-
-    const deleteBrand = (category, brand) => {
-        const brandRef = ref(database, `categories/${category}/brands/${brand}`);
-        remove(brandRef)
-            .catch((error) => console.error("Marka silinirken hata:", error));
-    };
 
     return (
         <div>
@@ -145,46 +149,14 @@ function AdminEquipmentPage() {
                             <div>
                                 {Object.keys(categories).map((category) => (
                                     <div key={category} style={{ border: "1px solid black", padding: 20, margin: 10, textAlign: "center" }} className="category-item">
-                                        {editingCategory === category ? (
-                                            <div>
-                                                <input
-                                                    type="text"
-                                                    value={editedCategoryName}
-                                                    onChange={(e) => setEditedCategoryName(e.target.value)}
-                                                />
-                                                <button onClick={() => updateCategory(category)}>Kaydet</button>
-                                                <button onClick={() => setEditingCategory(null)}>İptal</button>
-                                            </div>
-                                        ) : (
-                                            <div>
-                                                <h3 onClick={() => setSelectedCategory(category)}>{category}</h3>
-                                                <button onClick={() => { setEditingCategory(category); setEditedCategoryName(category); }}>Düzenle</button>
-                                                <button onClick={() => deleteCategory(category)}>Sil</button>
-                                            </div>
-                                        )}
+                                        <h3 onClick={() => setSelectedCategory(category)}>{category}</h3>
                                         {selectedCategory === category && (
                                             <div className="brands">
                                                 <h4>Markalar</h4>
                                                 {categories[category].brands
                                                     ? Object.keys(categories[category].brands).map((brand) => (
-                                                        <div key={brand} style={{ border: "1px solid blue", padding: 20, margin: 10, textAlign: "center" }} className="brand-item">
-                                                            {editingBrand === brand ? (
-                                                                <div>
-                                                                    <input
-                                                                        type="text"
-                                                                        value={editedBrandName}
-                                                                        onChange={(e) => setEditedBrandName(e.target.value)}
-                                                                    />
-                                                                    <button onClick={() => updateBrand(category, brand)}>Kaydet</button>
-                                                                    <button onClick={() => setEditingBrand(null)}>İptal</button>
-                                                                </div>
-                                                            ) : (
-                                                                <div>
-                                                                    {brand}
-                                                                    <button onClick={() => { setEditingBrand(brand); setEditedBrandName(brand); }}>Düzenle</button>
-                                                                    <button onClick={() => deleteBrand(category, brand)}>Sil</button>
-                                                                </div>
-                                                            )}
+                                                        <div key={brand} style={{ border: "1px solid blue", padding: 20, margin: 10, textAlign: "center" }} className="brand-item" onClick={() => setSelectedBrand(brand)}>
+                                                            {brand}
                                                         </div>
                                                     ))
                                                     : "Marka mevcut değil"}
@@ -216,42 +188,46 @@ function AdminEquipmentPage() {
                                         type="text"
                                         value={newProductImage}
                                         onChange={(e) => setNewProductImage(e.target.value)}
-                                        placeholder="Ürün Resmi URL"
+                                        placeholder="Ürün Resim URL'si"
                                     />
                                     <button onClick={addProduct}>Ürün Ekle</button>
-                                </div>
-                            )}
 
-                            {selectedCategory && selectedBrand && (
-                                <div className="products">
-                                    <h2>{selectedBrand} Ürünleri</h2>
-                                    {categories[selectedCategory]?.brands[selectedBrand]?.map((product, index) => (
-                                        <div key={index}>
-                                            {editProductId === product.id ? (
-                                                <div>
-                                                    <input
-                                                        type="text"
-                                                        value={editedProductName}
-                                                        onChange={(e) => setEditedProductName(e.target.value)}
-                                                    />
-                                                    <input
-                                                        type="text"
-                                                        value={editedProductImage}
-                                                        onChange={(e) => setEditedProductImage(e.target.value)}
-                                                    />
-                                                    <button onClick={() => handleSaveEdit(selectedCategory, selectedBrand, product.id)}>Kaydet</button>
-                                                    <button onClick={() => setEditProductId(null)}>İptal</button>
+                                    <h3>Ürünler</h3>
+                                    {categories[selectedCategory].brands[selectedBrand] &&
+                                        Object.keys(categories[selectedCategory].brands[selectedBrand]).length > 0 ? (
+                                        Object.keys(categories[selectedCategory].brands[selectedBrand]).map((productId) => {
+                                            const product = categories[selectedCategory].brands[selectedBrand][productId];
+                                            return (
+                                                <div style={{ border: "1px solid red", padding: 20, margin: 10, textAlign: "center" }} key={productId}>
+                                                    {editProductId === productId ? (
+                                                        <div>
+                                                            <input
+                                                                type="text"
+                                                                value={editedProductName}
+                                                                onChange={(e) => setEditedProductName(e.target.value)}
+                                                            />
+                                                            <input
+                                                                type="text"
+                                                                value={editedProductImage}
+                                                                onChange={(e) => setEditedProductImage(e.target.value)}
+                                                            />
+                                                            <button onClick={() => handleSaveEdit(selectedCategory, selectedBrand, productId)}>Kaydet</button>
+                                                            <button onClick={() => setEditProductId(null)}>İptal</button>
+                                                        </div>
+                                                    ) : (
+                                                        <div>
+                                                            <p>Ürün İsmi: {product.name}</p>
+                                                            <img src={product.image} alt={product.name} style={{ width: '100px' }} />
+                                                            <button style={{ margin: 10 }} onClick={() => handleEditProduct(productId, product)}>Düzenle</button>
+                                                            <button style={{ margin: 10 }} onClick={() => deleteProduct(selectedCategory, selectedBrand, productId)}>Sil</button>
+                                                        </div>
+                                                    )}
                                                 </div>
-                                            ) : (
-                                                <div>
-                                                    <h4>{product.name}</h4>
-                                                    <img src={product.image} alt={product.name} style={{ width: "100px", height: "100px" }} />
-                                                    <button onClick={() => handleEditProduct(product.id, product)}>Düzenle</button>
-                                                    <button onClick={() => deleteProduct(selectedCategory, selectedBrand, product.id)}>Sil</button>
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))}
+                                            );
+                                        })
+                                    ) : (
+                                        <p>Ürün bulunamadı</p>
+                                    )}
                                 </div>
                             )}
                         </div>
@@ -263,4 +239,4 @@ function AdminEquipmentPage() {
     );
 }
 
-export default AdminEquipmentPage;
+export default AdminEquipmentPage;;
