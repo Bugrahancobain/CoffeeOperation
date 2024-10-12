@@ -1,152 +1,180 @@
 "use client";
-import React, { useState } from 'react';
-import "../styles/ProductsPage.css";
-import Footer from '../components/Footer';
+import React, { useState, useEffect } from "react";
+import { database } from "../../../firebase"; // Firebase yapılandırma dosyanızı buraya ekleyin
+import { ref, onValue } from "firebase/database"; // Realtime Database için gerekli fonksiyonlar
+import "../styles/ProductsPage.css"; // Stil dosyanız
+import Footer from "../components/Footer"; // Footer bileşeni
 
-const categories = [
-    { id: 1, name: 'Güney Amerika Kahveleri' },
-    { id: 2, name: 'Asya Kahveleri' },
-    { id: 3, name: 'Arabica Çekirdekleri' },
-    { id: 4, name: 'Türk Kahveleri' },
-    { id: 5, name: 'Şuruplar' },
-    // İhtiyacınıza göre daha fazla kategori ekleyebilirsiniz
-];
+function ProductsPage() {
+  const [categories, setCategories] = useState([]); // Ürünleri tutmak için durum
+  const [expandedProduct, setExpandedProduct] = useState(null); // Hangi ürünlerin açık olduğunu tutar
+  const [expandedBrand, setExpandedBrand] = useState(null); // Hangi markanın açık olduğunu tutar
+  const [showAllProducts, setShowAllProducts] = useState(true); // Tüm ürünleri gösterip göstermeme durumu
 
-const products = {
-    'Güney Amerika Kahveleri': [
-        { id: 1, name: 'Brezilya Santos', image: '/kahvepaketi.jpeg', brand: 'Brezilya' },
-        { id: 2, name: 'Kolombiya Supremo', image: '/kahvepaketi.jpeg', brand: 'Kolombiya' },
-        // Daha fazla ürün ekleyebilirsiniz
-    ],
-    'Asya Kahveleri': [
-        { id: 3, name: 'Sumatra Mandheling', image: '/kahvepaketi.jpeg', brand: 'Sumatra' },
-        { id: 4, name: 'Vietnam Robusta', image: '/kahvepaketi.jpeg', brand: 'Vietnam' },
-        // Daha fazla ürün ekleyebilirsiniz
-    ],
-    'Arabica Çekirdekleri': [
-        { id: 5, name: 'Yemen Mocca', image: '/kahvepaketi.jpeg', brand: 'Yemen' },
-        { id: 6, name: 'Etiyopya Yirgacheffe', image: '/kahvepaketi.jpeg', brand: 'Etiyopya' },
-        // Daha fazla ürün ekleyebilirsiniz
-    ],
-    'Türk Kahveleri': [
-        { id: 7, name: 'Çekirdek Türk Kahvesi', image: '/kahvepaketi.jpeg', brand: 'Türkiye' },
-        { id: 8, name: 'Kavrulmuş Türk Kahvesi', image: '/kahvepaketi.jpeg', brand: 'Türkiye' },
-        // Daha fazla ürün ekleyebilirsiniz
-    ],
-    'Şuruplar': [
-        { id: 9, name: 'Vanilya Şurubu', image: '/surup.webp', brand: 'Şurup Markası A' },
-        { id: 10, name: 'Caramel Şurubu', image: '/surup.webp', brand: 'Şurup Markası B' },
-        // Daha fazla ürün ekleyebilirsiniz
-    ],
-};
-
-function CoffeePage() {
-    const [selectedCategory, setSelectedCategory] = useState('');
-    const [showAll, setShowAll] = useState(true);
-    const [selectedBrand, setSelectedBrand] = useState(null);
-    const [brandsVisibility, setBrandsVisibility] = useState({}); // Markaların görünürlük durumu
-
-    const handleCategoryClick = (category) => {
-        setSelectedCategory(category);
-        setShowAll(false);
-        setSelectedBrand(null); // Yeni kategori seçildiğinde markayı sıfırla
-
-        // Markaların görünürlüğünü yönet
-        setBrandsVisibility((prev) => ({
-            ...prev,
-            [category]: !prev[category] // Seçilen kategori için görünürlüğü ters çevir
-        }));
+  // Realtime Database'den verileri çekme
+  useEffect(() => {
+    const fetchCategories = () => {
+      const categoriesRef = ref(database, "products"); // Ürünleri çekeceğimiz referans
+      onValue(categoriesRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          setCategories(data);
+        } else {
+          console.log("Ürünler veritabanında mevcut değil.");
+        }
+      });
     };
 
-    const handleShowAllClick = () => {
-        setShowAll(true);
-        setSelectedBrand(null); // Tümünü gösterirken markayı sıfırla
-        setBrandsVisibility({}); // Tüm kategorileri gizle
-    };
+    fetchCategories();
+  }, []);
 
-    const handleBrandClick = (brand) => {
-        setSelectedBrand(brand === selectedBrand ? null : brand); // Eğer seçili markaya tekrar tıklanırsa sıfırlama
-    };
+  // Accordion mantığını değiştirme
+  const toggleExpandProduct = (productId) => {
+    setExpandedProduct(expandedProduct === productId ? null : productId);
+    setExpandedBrand(null); // Ürüne tıklanınca markayı sıfırla
+    setShowAllProducts(false); // Ürün seçildiğinde "Tüm Ürünler" modundan çık
+  };
 
-    const displayedProducts = showAll ? Object.values(products).flat() : products[selectedCategory];
-    const filteredProducts = selectedBrand ? displayedProducts.filter(product => product.brand === selectedBrand) : displayedProducts;
+  const toggleExpandBrand = (brandId) => {
+    setExpandedBrand(expandedBrand === brandId ? null : brandId);
+  };
 
-    return (
-        <div>
-            <div className="coffee-page">
-                <div className="sidebar">
-                    <h2>Kategoriler</h2>
-                    <div
-                        className={`category ${showAll ? 'active' : ''}`}
-                        onClick={handleShowAllClick}
-                    >
-                        Tümünü Göster
-                    </div>
-                    {categories.map((category) => (
-                        <div key={category.id}>
-                            <div
-                                className={`category ${selectedCategory === category.name ? 'active' : ''}`}
-                                onClick={() => handleCategoryClick(category.name)}
-                            >
-                                {category.name}
-                            </div>
-                            {/* Kategoriye tıklandığında markaları göster */}
-                            {brandsVisibility[category.name] && (
-                                <div className="brands">
-                                    {/* Burada markaları tanımlayabilirsiniz. Örneğin: */}
-                                    {category.name === 'Güney Amerika Kahveleri' && (
-                                        <>
-                                            <div
-                                                className={`brand ${selectedBrand === 'Brezilya' ? 'active' : ''}`}
-                                                onClick={() => handleBrandClick('Brezilya')}
-                                            >
-                                                Brezilya
-                                            </div>
-                                            <div
-                                                className={`brand ${selectedBrand === 'Kolombiya' ? 'active' : ''}`}
-                                                onClick={() => handleBrandClick('Kolombiya')}
-                                            >
-                                                Kolombiya
-                                            </div>
-                                        </>
-                                    )}
-                                    {category.name === 'Asya Kahveleri' && (
-                                        <>
-                                            <div
-                                                className={`brand ${selectedBrand === 'Sumatra' ? 'active' : ''}`}
-                                                onClick={() => handleBrandClick('Sumatra')}
-                                            >
-                                                Sumatra
-                                            </div>
-                                            <div
-                                                className={`brand ${selectedBrand === 'Vietnam' ? 'active' : ''}`}
-                                                onClick={() => handleBrandClick('Vietnam')}
-                                            >
-                                                Vietnam
-                                            </div>
-                                        </>
-                                    )}
-                                    {/* Diğer kategoriler için markaları buraya ekleyin */}
-                                </div>
-                            )}
-                        </div>
-                    ))}
+  // Tüm markaların ürünlerini toplayan fonksiyon
+  const getAllProductsForCategory = (category) => {
+    let allProducts = [];
+    if (category.brands) {
+      Object.entries(category.brands).forEach(([brandId, brand]) => {
+        if (brand.products) {
+          allProducts = [...allProducts, ...Object.entries(brand.products)];
+        }
+      });
+    }
+    return allProducts;
+  };
+
+  // Tüm kategorilere ait tüm ürünleri toplayan fonksiyon
+  const getAllProducts = () => {
+    let allProducts = [];
+    Object.entries(categories).forEach(([categoryId, category]) => {
+      allProducts = [...allProducts, ...getAllProductsForCategory(category)];
+    });
+    return allProducts;
+  };
+
+  // Sayfa ilk yüklendiğinde tüm ürünlerin gösterilmesi
+  useEffect(() => {
+    setShowAllProducts(true); // Sayfa yüklendiğinde tüm ürünler gösterilsin
+  }, []);
+
+  return (
+    <div>
+      <div className="products-page">
+        <div className="sidebar">
+          <h2>Ürünler</h2>
+
+          {/* Tüm Ürünler butonu */}
+          <h3
+            onClick={() => {
+              setShowAllProducts(true);
+              setExpandedProduct(null); // Ürünü sıfırla
+              setExpandedBrand(null); // Markayı sıfırla
+            }}
+            className="category"
+          >
+            Tüm Ürünler
+          </h3>
+
+          {Object.entries(categories).map(([categoryId, category]) => (
+            <div key={categoryId}>
+              <h3
+                onClick={() => toggleExpandProduct(categoryId)}
+                className="category"
+              >
+                {category.name}
+              </h3>
+              {expandedProduct === categoryId && (
+                <div className="brands">
+                  {category.brands ? (
+                    Object.entries(category.brands).map(([brandId, brand]) => (
+                      <div key={brandId}>
+                        <h4
+                          onClick={() => toggleExpandBrand(brandId)}
+                          className="brand"
+                        >
+                          {brand.name}
+                        </h4>
+                      </div>
+                    ))
+                  ) : (
+                    <p>Bu ürüne ait marka bulunmuyor.</p>
+                  )}
                 </div>
-                <div className="product-display">
-                    <h2 style={{ textAlign: "center" }}>{showAll ? 'Tüm Ürünlerimiz' : selectedCategory}</h2>
-                    <div className="product-grid">
-                        {filteredProducts?.map((product) => (
-                            <div key={product.id} className="product-card">
-                                <img src={product.image} alt={product.name} />
-                                <h3 style={{ fontSize: "13px" }}>{product.name}</h3>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+              )}
             </div>
-            <Footer />
+          ))}
         </div>
-    );
+
+        <div className="product-display">
+          {/* Ürünlerin grid şeklinde gösterileceği alan */}
+          <h2>Ürünler</h2>
+
+          {showAllProducts ? (
+            // Tüm Ürünler butonuna tıklanmışsa veya sayfa ilk yüklendiğinde tüm ürünleri göster
+            <div className="product-grid">
+              {getAllProducts().map(([productId, product]) => (
+                <div key={productId} className="product-card">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="product-image"
+                  />
+                  <h3>{product.name}</h3>
+                </div>
+              ))}
+            </div>
+          ) : expandedProduct && !expandedBrand ? (
+            // Ürün seçilmişse ve marka seçilmemişse tüm markaların ürünlerini göster
+            <div className="product-grid">
+              {getAllProductsForCategory(categories[expandedProduct]).map(
+                ([productId, product]) => (
+                  <div key={productId} className="product-card">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="product-image"
+                    />
+                    <h3>{product.name}</h3>
+                  </div>
+                )
+              )}
+            </div>
+          ) : expandedBrand &&
+            categories[expandedProduct]?.brands[expandedBrand]?.products ? (
+            // Marka seçilmişse sadece o markanın ürünlerini göster
+            <div className="product-grid">
+              {Object.entries(
+                categories[expandedProduct].brands[expandedBrand].products
+              ).map(([productId, product]) => (
+                <div key={productId} className="product-card">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="product-image"
+                  />
+                  <h3>{product.name}</h3>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>Seçili markada ürün bulunmuyor.</p>
+          )}
+        </div>
+      </div>
+      <div>
+        <Footer />
+      </div>
+    </div>
+  );
 }
 
-export default CoffeePage;
+export default ProductsPage;

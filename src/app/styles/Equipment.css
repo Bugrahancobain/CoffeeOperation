@@ -9,7 +9,6 @@
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     height: 100vh;
-
 }
 
 .sidebar h2 {
@@ -35,19 +34,8 @@
     margin-top: 10px;
 }
 
-.accordion-header {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-}
-
-.accordion-header:hover {
-    background-color: #d0d0d0;
-}
-
 .brands {
-    padding-left: 10px; /* İçeriği biraz sola yasla */
+    padding-left: 10px;
 }
 
 .brand {
@@ -84,7 +72,7 @@
 
 .product-card {
     width: 200px;
-    height: 200px;
+    height: 250px;
     border: 1px solid #ddd;
     border-radius: 5px;
     overflow: hidden;
@@ -95,17 +83,16 @@
     justify-content: space-between;
     align-items: center;
     transition: 0.5s ease;
-
 }
 
 .product-card:hover {
-    transform: scale(1.1); /* %5 büyüme */
+    transform: scale(1.1);
 }
 
 .product-card img {
     width: 100%;
     height: 150px;
-    object-fit: cover; /* Resimleri ortala ve cover yap */
+    object-fit: cover;
 }
 
 .product-card h3 {
