@@ -31,3 +31,9 @@
 .architecture-support p {
     margin-bottom: 15px; /* Paragraf alt boşluğu */
 }
+
+@media (max-width:480px){
+    .architecture-support{
+        width: 90% !important;
+    }
+  }

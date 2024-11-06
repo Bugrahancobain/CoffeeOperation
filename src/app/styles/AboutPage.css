@@ -1,15 +1,24 @@
-.aboutMain{
-    text-align: center;
-    margin-top: 20px;
+.aboutMain {
+  text-align: center;
+  margin-top: 20px;
 }
 
-.aboutMain p{
-    width: 500px;
-    margin: 50px auto;
+.aboutMain p {
+  width: 500px;
+  margin: 50px auto;
 }
 
-.aboutBannerImage{
-    width: 100vw;
-    height: 95vh;
-    object-fit: cover;
+.aboutBannerImage {
+  width: 100%;
+  height: 95vh;
+  object-fit: cover;
+}
+
+@media (max-width:480px){
+  .aboutMain p {
+    width: 90%;
+  }
+  .aboutBannerImage {
+    height: 45vh;
+  }
 }

@@ -73,7 +73,8 @@ function page() {
                     </p>
                     <div style={{ textAlign: "right", marginTop: "30px" }}>
                         <Link style={{ textDecoration: "none", color: "black", border: "1px solid black", borderRadius: "24px", padding: "10px" }} href="/services">Diğer Hizmetlerimiz</Link>
-                    </div></div>
+                    </div>
+                </div>
 
             </div><Footer /></div>
     )

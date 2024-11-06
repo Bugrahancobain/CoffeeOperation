@@ -1,53 +1,97 @@
-.contactMain{
-    background-color: rgba(69,104,61,255);;
-    height: max-content;
-    width: 100vw;
-    display: flex;
-    justify-content: space-between;
-    padding: 5% 10%;
-    color: white;
+.contactMain {
+  background-color: rgba(69, 104, 61, 255);
+  height: max-content;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 5% 10%;
+  color: white;
+}
+.contactPageMain {
+  background-color: rgba(69, 104, 61, 255);
+  height: max-content;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 5% 10%;
+  color: white;
 }
 
-.contactText h1, .contactText p{
-    margin: 10px;
+.contactText h1,
+.contactText p {
+  margin: 10px;
 }
 
-#contactForm, .contactForm{
-    height: max-content;
+#contactForm,
+.contactForm {
+  height: max-content;
 }
 
-.contactDiv{
-    display: flex;
+.contactDiv {
+  display: flex;
 }
 
-.contactContext{
-    display: flex;
+.contactContext {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactContext input,
+.contactContext label {
+  height: 30px;
+  margin: 10px;
+}
+
+.contactContext textarea {
+  width: 306px;
+  height: 75px;
+  padding: 10px;
+  resize: none;
+  font-size: 12px;
+  margin: 10px;
+}
+
+.contactBtnDiv {
+  text-align: center;
+}
+
+.contactBtn {
+  background-color: #cd7c36;
+color: white;
+  width: 150px;
+  border: none;
+  padding: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+@media (max-width:1024px){
+  .contactMain {
+    height: auto;
+    justify-content: flex-start;
     flex-direction: column;
-}
-
-.contactContext input, .contactContext label{
-    height: 30px;
-    margin: 10px;
-}
-
-.contactContext textarea{
-    width: 306px;
-    height: 75px;
-    padding: 10px;
-    resize: none;
-    font-size: 12px;
-    margin: 10px;
-}
-
-.contactBtnDiv{
     text-align: center;
+}.contactPageMain {
+  min-height: 100vh;
+
+  height: max-content;
+  justify-content: flex-start;
+  flex-direction: column;
+  text-align: center;
+}
+  .contactDiv{
+    justify-content: space-around;
+  }
+  .contactContext{
+    text-align: center;
+    align-items: center;
+  }
 }
 
-.contactBtn{
-    background-color: rgba(254,231,174,255);
-    width: 150px;
-    border: none;
-    padding: 15px;
-    border-radius: 12px;
-    cursor: pointer;
+@media (max-width:480px){
+  .contactDiv{
+    flex-direction: column;
+  }
 }

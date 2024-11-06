@@ -1,10 +1,10 @@
 .productsImage{
-    height: 100vh;
+    height: 75vh;
     width: 97vw;
     background-position: center;
     background-size: cover;
     margin: 0px 20px;
-    border-radius: 24px;
+    border-radius: 8px;
     text-align: center;
     padding-top: 50px;
     color: black;

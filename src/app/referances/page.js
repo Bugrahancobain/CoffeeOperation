@@ -1,24 +1,22 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { ref, onValue } from "firebase/database";
+import { ref, get } from "firebase/database";
 import { database } from "../../../firebase"; // Firebase ayarlarını buraya ekleyin
 import "../styles/Referances.css";
 import Footer from "../components/Footer";
+import { FaInstagram } from "react-icons/fa";
 
-function pages() {
-  const [references, setReferences] = useState([]);
-  // Firebase'den referans verilerini çekme
-
-  useEffect(() => {
+// Veri çekme işlemi async bir fonksiyon olarak direkt bileşen içinde yapılacak
+export default async function Pages() {
+  let references = [];
+  try {
     const referanslarRef = ref(database, "references");
-    onValue(referanslarRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        const loadedReferences = Object.values(data); // Verileri bir array haline getir
-        setReferences(loadedReferences);
-      }
-    });
-  }, []);
+    const snapshot = await get(referanslarRef);
+    const data = snapshot.val();
+    if (data) {
+      references = Object.values(data); // Verileri bir array haline getir
+    }
+  } catch (error) {
+    console.error("Veri çekme hatası:", error);
+  }
 
   return (
     <div className="refMain">
@@ -38,7 +36,7 @@ function pages() {
               style={{ backgroundImage: `url(${reference.imageUrl})` }}
             >
               <div className="instagramIcon">
-                <img src="/instagram-icon.png" alt="Instagram" />
+                <FaInstagram />
               </div>
             </div>
           </a>
@@ -48,5 +46,3 @@ function pages() {
     </div>
   );
 }
-
-export default pages;

@@ -5,6 +5,7 @@ import { ref, onValue, set, remove, push, update } from "firebase/database";
 import "./ReferancesAdmin.css";
 import "../styles/AdminPanel.css";
 import AdminNavbar from "../adminComponent/AdminNavbar";
+import { useAuthRedirect } from "../userCheck";
 
 const ReferencesAdmin = () => {
   const [references, setReferences] = useState([]);
@@ -13,6 +14,7 @@ const ReferencesAdmin = () => {
     instagramLink: "",
   });
   const [editReference, setEditReference] = useState(null);
+  const { user, loading } = useAuthRedirect();
 
   useEffect(() => {
     const referenceRef = ref(db, "references");
@@ -27,6 +29,14 @@ const ReferencesAdmin = () => {
       }
     });
   }, []);
+
+  if (loading) {
+    return <p>Yükleniyor...</p>; // Kullanıcı doğrulama sırasında yükleniyor ekranı gösterin
+  }
+
+  if (!user) {
+    return null; // Eğer kullanıcı doğrulanmadıysa hiçbir şey göstermeyin (zaten yönlendiriliyor)
+  }
 
   const handleAddReference = async () => {
     if (newReference.instagramLink && newReference.imageUrl) {
@@ -71,6 +81,7 @@ const ReferencesAdmin = () => {
         <h1>Referans Ayarları</h1>
         <div className="addReference">
           <input
+            style={{ borderRadius: "4px" }}
             type="text"
             placeholder="Resim URL'si"
             value={newReference.imageUrl}
@@ -79,6 +90,7 @@ const ReferencesAdmin = () => {
             }
           />
           <input
+            style={{ borderRadius: "4px" }}
             type="text"
             placeholder="Instagram Linki"
             value={newReference.instagramLink}
@@ -118,6 +130,7 @@ const ReferencesAdmin = () => {
           <div className="editReference">
             <h2>Referansı Düzenle</h2>
             <input
+              style={{ borderRadius: "4px" }}
               type="text"
               placeholder="Resim URL'si"
               value={editReference.imageUrl}
@@ -126,6 +139,7 @@ const ReferencesAdmin = () => {
               }
             />
             <input
+              style={{ borderRadius: "4px" }}
               type="text"
               placeholder="Instagram Linki"
               value={editReference.instagramLink}

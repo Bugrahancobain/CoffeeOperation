@@ -8,7 +8,8 @@ function Products() {
         <div className='products'>
             <Link className='servicesLink' href="/equipment">
                 <div className='productsImage' style={{ backgroundImage: `url(${cimbali.src})` }}>
-                    <span className='productsImageText'>TÜM EKİPMANLARIMIZ</span>
+
+                    <span className='productsImageText'><span style={{ backgroundColor: "black", padding: "8px", borderRadius: "8px", fontSize: "18px" }}>TÜM EKİPMANLARIMIZ</span></span>
                 </div>
             </Link>
         </div>

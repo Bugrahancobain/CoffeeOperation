@@ -1,28 +1,72 @@
-.navbar{
+.navbar {
     display: flex;
     justify-content: space-between;
-    text-align: center;
     align-items: center;
-    background-color: rgba(69,104,61,255);
+    background-color: rgba(69, 104, 61, 255);
+    padding: 10px;
+    box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 4px;
 }
 
-.navbarImage{
+.navbarImage {
     width: 200px;
     height: 100px;
     object-fit: cover;
     border-radius: 16px;
 }
 
-.navbarLink{
-    padding: 0 20px;
-    color: black;
-    text-decoration: none;
-    font-weight: bold;
-    color: white;
-
+.navbarLinks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.navbarLink:active{
+.navbarLink {
+    padding: 0 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbarLink:active {
     color: black;
     text-decoration: none;
+}
+.menuIcon {
+    display: none;
+}
+
+/* Mobil görünüm için */
+@media (max-width: 1024px) {
+    .navbarLinks {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100px;
+        right: 0;
+        background-color: rgba(69, 104, 61, 255);
+        width: 100%;
+        text-align: center;
+        max-height: 0; 
+        overflow: hidden; 
+        transition: max-height 0.3s ease-out; 
+        background-color: #d89153;
+        z-index: 100;
+    }
+    
+    .navbarLinks.active {
+        max-height: 500px; 
+        display: flex;
+        z-index: 100;
+        padding: 0 20px;
+        transition: max-height 0.3s ease-out;
+        background-color: #d89153;
+    }
+    .navbarLink{
+        margin: 10px 0;
+    }
+
+    .menuIcon {
+        display: block;
+        cursor: pointer;
+    }
 }

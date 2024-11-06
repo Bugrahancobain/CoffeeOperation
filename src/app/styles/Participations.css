@@ -10,5 +10,30 @@
 }
 
 .participationsImage{
-    object-fit: cover;
+    object-fit: contain;
+
+}
+
+@media (max-width:1024px){
+    .participationsMain{
+        width: 100%;
+    }
+
+    .particioationsImageBox{
+        width: 99%;
+    }
+    .participationsImage{
+        width: 16.6%;
+    }
+}
+
+@media (max-width:480px){
+    .particioationsImageBox{
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+    }
+    .participationsImage{
+        width: max-content;
+    }
 }

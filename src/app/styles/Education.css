@@ -31,3 +31,8 @@
 .coffee-journey p {
     margin-bottom: 15px; /* Paragraf alt boşluğu */
 }
+@media (max-width:480px){
+    .coffee-journey {
+        width: 90% !important;
+    }
+  }

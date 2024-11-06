@@ -1,7 +1,8 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { database } from "../../../firebase"; // Firebase yapılandırma dosyanızı buraya ekleyin
 import { ref, onValue } from "firebase/database"; // Realtime Database için gerekli fonksiyonlar
+import { FaBars } from "react-icons/fa"; // Hamburger menü ikonu
 import "../styles/ProductsPage.css"; // Stil dosyanız
 import Footer from "../components/Footer"; // Footer bileşeni
 
@@ -10,6 +11,8 @@ function ProductsPage() {
   const [expandedProduct, setExpandedProduct] = useState(null); // Hangi ürünlerin açık olduğunu tutar
   const [expandedBrand, setExpandedBrand] = useState(null); // Hangi markanın açık olduğunu tutar
   const [showAllProducts, setShowAllProducts] = useState(true); // Tüm ürünleri gösterip göstermeme durumu
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar'ın açık olup olmadığını kontrol eden durum
+  const sidebarRef = useRef(null); // Sidebar referansı
 
   // Realtime Database'den verileri çekme
   useEffect(() => {
@@ -37,6 +40,31 @@ function ProductsPage() {
 
   const toggleExpandBrand = (brandId) => {
     setExpandedBrand(expandedBrand === brandId ? null : brandId);
+    closeMenu(); // Sidebar'ı kapat
+  };
+
+  // Menü dışına tıklayınca sidebar'ı kapatan fonksiyon
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        closeMenu(); // Eğer tıklama sidebar dışında olursa menüyü kapat
+      }
+    };
+
+    if (isSidebarOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick); // Temizlik
+    };
+  }, [isSidebarOpen]);
+
+  // Menü kapatma fonksiyonu
+  const closeMenu = () => {
+    setIsSidebarOpen(false);
   };
 
   // Tüm markaların ürünlerini toplayan fonksiyon
@@ -69,8 +97,17 @@ function ProductsPage() {
   return (
     <div>
       <div className="products-page">
-        <div className="sidebar">
-          <h2>Ürünler</h2>
+        {/* Hamburger Menü */}
+        <div className="hamburger-menu">
+          <FaBars onClick={() => setIsSidebarOpen(!isSidebarOpen)} />
+        </div>
+
+        {/* Sidebar - Küçük ekranlarda kapatılabilir olacak */}
+        <div
+          ref={sidebarRef}
+          className={`sidebar ${isSidebarOpen ? "open" : ""}`}
+        >
+          <h2>Kategoriler</h2>
 
           {/* Tüm Ürünler butonu */}
           <h3
@@ -78,6 +115,7 @@ function ProductsPage() {
               setShowAllProducts(true);
               setExpandedProduct(null); // Ürünü sıfırla
               setExpandedBrand(null); // Markayı sıfırla
+              closeMenu(); // Sidebar'ı kapat
             }}
             className="category"
           >
@@ -114,12 +152,11 @@ function ProductsPage() {
           ))}
         </div>
 
+        {/* Ürünlerin gösterileceği alan */}
         <div className="product-display">
-          {/* Ürünlerin grid şeklinde gösterileceği alan */}
           <h2>Ürünler</h2>
 
           {showAllProducts ? (
-            // Tüm Ürünler butonuna tıklanmışsa veya sayfa ilk yüklendiğinde tüm ürünleri göster
             <div className="product-grid">
               {getAllProducts().map(([productId, product]) => (
                 <div key={productId} className="product-card">
@@ -133,7 +170,6 @@ function ProductsPage() {
               ))}
             </div>
           ) : expandedProduct && !expandedBrand ? (
-            // Ürün seçilmişse ve marka seçilmemişse tüm markaların ürünlerini göster
             <div className="product-grid">
               {getAllProductsForCategory(categories[expandedProduct]).map(
                 ([productId, product]) => (
@@ -150,7 +186,6 @@ function ProductsPage() {
             </div>
           ) : expandedBrand &&
             categories[expandedProduct]?.brands[expandedBrand]?.products ? (
-            // Marka seçilmişse sadece o markanın ürünlerini göster
             <div className="product-grid">
               {Object.entries(
                 categories[expandedProduct].brands[expandedBrand].products

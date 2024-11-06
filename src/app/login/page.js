@@ -47,6 +47,7 @@ export default function Login() {
       <form onSubmit={handleLogin} className="login-form">
         <h1>Giriş Yap</h1>
         <input
+          style={{ borderRadius: "4px" }}
           type="email"
           placeholder="E-posta"
           value={email}
@@ -54,6 +55,7 @@ export default function Login() {
           required
         />
         <input
+          style={{ borderRadius: "4px" }}
           type="password"
           placeholder="Şifre"
           value={password}

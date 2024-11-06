@@ -15,17 +15,19 @@
     position: relative; /* Mutlak pozisyonlama için gerekli */
     width: 30%;
     margin-top: 50px;
-    height: 95vh;
+    height: 65vh;
     padding-top: 10%;
     font-size: 25px;
     object-fit: cover;
     background-size: cover;
     background-position: center;
     color: white;
-    border-radius: 24px;
+    border-radius: 8px;
     transition: 0.3s ease;
     cursor: pointer;
     text-decoration: none;
+    overflow: hidden;
+    
 }
 
 /* Karartma efektinin olduğu bölüm */
@@ -39,13 +41,13 @@
     background-color: rgba(0, 0, 0, 0.5); /* Hafif karartma */
     opacity: 0; /* Başlangıçta görünmez */
     transition: opacity 0.3s ease; /* Geçiş efekti */
-    border-radius: 24px;
+    border-radius: 8px;
 }
 
 /* Hover olduğunda karartma efekti */
 .servicesImage:hover::before {
     opacity: 1; /* Hover olduğunda görünür hale getir */
-    border-radius: 24px;
+    border-radius: 8px;
 
 }
 
@@ -61,7 +63,7 @@
 
 .servicesLinkButton {
     text-align: center;
-    margin: 50px !important;
+    margin: 50px auto !important;
     padding: 10px;
     background-color: black;
     color: white;
@@ -75,14 +77,14 @@
     position: relative; /* Mutlak pozisyonlama için gerekli */
     width: 30%;
     margin-top: 50px;
-    height: 45vh;
+    height: 49vh;
     padding-top: 5%;
     font-size: 25px;
     object-fit: cover;
     background-size: cover;
     background-position: center;
     color: white;
-    border-radius: 24px;
+    border-radius: 8px;
     transition: 0.3s ease;
     cursor: pointer;
     text-decoration: none;
@@ -103,13 +105,13 @@
     background-color: rgba(0, 0, 0, 0.5); /* Hafif karartma */
     opacity: 0; /* Başlangıçta görünmez */
     transition: opacity 0.3s ease; /* Geçiş efekti */
-    border-radius: 24px;
+    border-radius: 8px;
 }
 
 /* Hover olduğunda karartma efekti */
 .servicesPageImage:hover::before {
     opacity: 1; /* Hover olduğunda görünür hale getir */
-    border-radius: 24px;
+    border-radius: 8px;
 
 }
 
@@ -117,4 +119,28 @@
 .servicesPageImage span, .servicesPageImage p {
     position: relative; /* Metin için konumlandırma */
     z-index: 1; /* Metnin karartma katmanının üstünde görünmesi için */
+}
+
+@media (max-width:1024px){
+    .servicesBox{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .servicesImage{
+        height: 30vh;
+        width: 70%;
+    }
+    .servicesPageImage{
+        height: 30vh;
+        width: 70%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+    }
+}
+@media (max-width:300px){
+    .servicesLinkButton{
+        font-size: 10px;
+    }
 }

@@ -10,7 +10,7 @@ function Footer() {
         <div className='footerMain'>
             <div className='footer'>© Coffee Operation {thisYear}. ALL RIGHTS RESERVED.</div>
             <div className='socialIcons'>
-                <a href="#">
+                <a href="https://www.instagram.com/coffeeoperation/">
                     <FaInstagram className='social' />
                 </a>
                 <a href="#">

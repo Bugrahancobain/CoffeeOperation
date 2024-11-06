@@ -31,3 +31,9 @@
 .coffee-consulting p {
     margin-bottom: 15px; /* Paragraf alt boşluğu */
 }
+
+@media (max-width:480px){
+    .coffee-consulting {
+        width: 90% !important;
+    }
+  }

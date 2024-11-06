@@ -1,32 +1,35 @@
-// src/app/blog/[id].js
-"use client";
-import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation"; // Doğru kütüphane
+// src/app/blog/[id]/page.js
+import React from "react";
 import { database } from "../../../../firebase";
-import { ref, onValue } from "firebase/database";
-import "./BlogDetail.css"; // CSS dosyasını ekleyin
+import { ref, get } from "firebase/database";
 import Footer from "@/app/components/Footer";
+import Link from "next/link";
 import "../../styles/Footer.css";
+import "./BlogDetail.css";
 
-function BlogDetailPage() {
-  const { id } = useParams(); // Dinamik id'yi al
-  const [post, setPost] = useState(null); // Tekil yazı için state
+async function getPostData(id) {
+  const postRef = ref(database, `posts/${id}`);
+  const snapshot = await get(postRef);
 
-  useEffect(() => {
-    if (id) {
-      const postRef = ref(database, `posts/${id}`);
-      onValue(postRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          setPost({ id, ...data }); // Tekil yazıyı set et
-        } else {
-          console.error("Post not found"); // Yazı bulunamazsa hata mesajı
-        }
-      });
-    }
-  }, [id]); // id değiştiğinde effect tetiklenir
+  if (snapshot.exists()) {
+    return { id, ...snapshot.val() };
+  } else {
+    throw new Error("Post not found");
+  }
+}
 
-  if (!post) return <div className="loading">Loading...</div>; // Veriler yüklenene kadar bekleme mesajı
+export default async function BlogDetailPage({ params }) {
+  const { id } = params;
+  let post;
+
+  try {
+    post = await getPostData(id);
+  } catch (error) {
+    console.error(error);
+    post = null;
+  }
+
+  if (!post) return <div className="loading">Loading...</div>;
 
   return (
     <div>
@@ -37,11 +40,23 @@ function BlogDetailPage() {
             className="blogContent"
             dangerouslySetInnerHTML={{ __html: post.content }}
           ></p>
+          <div style={{ textAlign: "right", marginTop: "30px" }}>
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "black",
+                border: "1px solid black",
+                borderRadius: "24px",
+                padding: "10px",
+              }}
+              href="/blog"
+            >
+              Diğer Yazılarımız
+            </Link>
+          </div>
         </div>
       </div>
       <Footer />
     </div>
   );
 }
-
-export default BlogDetailPage;

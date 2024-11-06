@@ -6,6 +6,8 @@ import AdminNavbar from "../adminComponent/AdminNavbar";
 import dynamic from "next/dynamic"; // Quill'i dinamik olarak yüklüyoruz
 import "quill/dist/quill.snow.css";
 import "./blogAdmin.css";
+import { useAuthRedirect } from "../userCheck";
+
 
 // Quill'i dinamik olarak, sunucu tarafında render edilmeden yükleyelim
 const QuillNoSSRWrapper = dynamic(() => import("react-quill"), { ssr: false });
@@ -18,6 +20,7 @@ function Page() {
   const [expandedPostId, setExpandedPostId] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editingPostId, setEditingPostId] = useState(null);
+  const { user, loading } = useAuthRedirect();
 
   useEffect(() => {
     const postsRef = ref(database, "posts");
@@ -51,6 +54,14 @@ function Page() {
         console.error("Blog yazısı eklenirken hata oluştu: ", error);
       });
   };
+
+  if (loading) {
+    return <p>Yükleniyor...</p>; // Kullanıcı doğrulama sırasında yükleniyor ekranı gösterin
+  }
+
+  if (!user) {
+    return null; // Eğer kullanıcı doğrulanmadıysa hiçbir şey göstermeyin (zaten yönlendiriliyor)
+  }
 
   const handleDelete = (postId) => {
     const postRef = ref(database, "posts/" + postId);
@@ -110,6 +121,7 @@ function Page() {
         <h1>Blog Yönetim Paneli</h1>
         <form onSubmit={isEditing ? handleUpdate : handleSubmit}>
           <input
+            style={{ borderRadius: "4px" }}
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -117,6 +129,7 @@ function Page() {
             required
           />
           <input
+            style={{ borderRadius: "4px" }}
             type="text"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}

@@ -64,48 +64,55 @@ function page() {
             <div className='resourcesPage'>
                 <div className='resourcesPageMain' style={{ marginTop: 0 }}>
                     <div className='resourcesPageText'>
-                        <h1>Pozisyon Arayışı!</h1>
+                        <h2>Pozisyon Arayışı!</h2>
                     </div>
                     <div className='resourcesPageForm'>
                         <form id="resourcesPageForm" onSubmit={handleJobSubmit}>
                             <div className='resourcesPageDiv'>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="name">İsim*</label>
-                                    <input type="text" id="name" name="name" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="text" id="name" name="name" required />
                                 </div>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="surname">Soyisim*</label>
-                                    <input type="text" id="surname" name="surname" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="text" id="surname" name="surname" required />
                                 </div>
                             </div>
                             <div className='resourcesPageDiv'>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="email">E-Posta*</label>
-                                    <input type="email" id="email" name="email" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="email" id="email" name="email" required />
                                 </div>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="phone">Telefon*</label>
-                                    <input type="tel" id="phone" name="phone" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="tel" id="phone" name="phone" required />
                                 </div>
                             </div>
                             <div className='resourcesPageDiv'>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="brandname">Doğum Tarihi*</label>
-                                    <input type="text" id="brandname" name="brandname" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="text" id="brandname" name="brandname" required />
                                 </div>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="pozition">Başvurulan Pozisyon*</label>
-                                    <input type="text" id="pozition" name="pozition" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="text" id="pozition" name="pozition" required />
                                 </div>
                             </div>
                             <div className='resourcesPageDivv'>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="city">Bulunduğunuz Şehir*</label>
-                                    <input type="text" id="city" name="city" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="text" id="city" name="city" required />
                                 </div>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="carieer">İş Tecrübeleriniz*</label>
-                                    <textarea placeholder='Mesajınızı Buraya Yazabilirsiniz.' id="carieer" name="carieer" required></textarea>
+                                    <textarea style={{ borderRadius: "4px" }} placeholder='Mesajınızı Buraya Yazabilirsiniz.' id="carieer" name="carieer" required></textarea>
                                 </div>
                             </div>
                             <div className='resourcesPageBtnDiv'>
@@ -117,48 +124,55 @@ function page() {
 
                 <div className='resourcesPageMain'>
                     <div className='resourcesPageText'>
-                        <h1>İşveren Desteği!</h1>
+                        <h2>İşveren Desteği!</h2>
                     </div>
                     <div className='resourcesPageForm'>
                         <form id="resourcesPageForm" onSubmit={handleHumanSubmit}>
                             <div className='resourcesPageDiv'>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="name">Yetkili İsim*</label>
-                                    <input type="text" id="name" name="name" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="text" id="name" name="name" required />
                                 </div>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="surname">Yetkili Soyisim*</label>
-                                    <input type="text" id="surname" name="surname" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="text" id="surname" name="surname" required />
                                 </div>
                             </div>
                             <div className='resourcesPageDiv'>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="email">E-Posta*</label>
-                                    <input type="email" id="email" name="email" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="email" id="email" name="email" required />
                                 </div>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="phone">Telefon*</label>
-                                    <input type="tel" id="phone" name="phone" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="tel" id="phone" name="phone" required />
                                 </div>
                             </div>
                             <div className='resourcesPageDiv'>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="brandname">İşletme İsmi*</label>
-                                    <input type="text" id="brandname" name="brandname" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="text" id="brandname" name="brandname" required />
                                 </div>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="pozition">Aranan Pozisyon*</label>
-                                    <input type="text" id="pozition" name="pozition" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="text" id="pozition" name="pozition" required />
                                 </div>
                             </div>
                             <div className='resourcesPageDivv'>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="city">Bulunduğunuz Şehir*</label>
-                                    <input type="text" id="city" name="city" required />
+                                    <input
+                                        style={{ borderRadius: "4px" }} type="text" id="city" name="city" required />
                                 </div>
                                 <div className='resourcesPageContext'>
                                     <label htmlFor="carieer">Belirtmek istediğiniz diğer konular*</label>
-                                    <textarea placeholder='Mesajınızı Buraya Yazabilirsiniz.' id="carieer" name="carieer" required></textarea>
+                                    <textarea style={{ borderRadius: "4px" }} placeholder='Mesajınızı Buraya Yazabilirsiniz.' id="carieer" name="carieer" required></textarea>
                                 </div>
                             </div>
                             <div className='resourcesPageBtnDiv'>

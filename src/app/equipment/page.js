@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { database } from "../../../firebase"; // Firebase yapılandırma dosyanızı buraya ekleyin
 import { ref, onValue } from "firebase/database"; // Realtime Database için gerekli fonksiyonlar
 import "../styles/Equipment.css"; // Stil dosyanız
@@ -10,9 +10,10 @@ function EquipmentPage() {
   const [expandedCategory, setExpandedCategory] = useState(null); // Hangi kategorinin altındaki markaların açık olduğunu tutar
   const [expandedBrand, setExpandedBrand] = useState(null); // Hangi markanın altındaki ürünlerin açık olduğunu tutar
   const [showAllProducts, setShowAllProducts] = useState(true); // Tüm ürünleri gösterip göstermeme durumu
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar'ı açıp kapatma durumu
+  const sidebarRef = useRef(null); // Sidebar referansı
 
   // Realtime Database'den verileri çekme
-
   useEffect(() => {
     const fetchCategories = () => {
       const categoriesRef = ref(database, "categories"); // Kategorileri çekeceğimiz referans
@@ -28,6 +29,20 @@ function EquipmentPage() {
 
     fetchCategories();
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Eğer sidebar dışında bir yere tıklandıysa menüyü kapat
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setIsSidebarOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Temizlik yap (event listener'ı kaldır)
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [sidebarRef]);
 
   // Accordion mantığını değiştirme
   const toggleExpandCategory = (categoryId) => {
@@ -70,7 +85,12 @@ function EquipmentPage() {
   return (
     <div>
       <div className="equipment-page">
-        <div className="sidebar">
+        {/* Hamburger Menü */}
+        <div className="hamburger-menu" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+          ☰
+        </div>
+
+        <div ref={sidebarRef} className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
           <h2>Kategoriler</h2>
 
           {/* Tüm Ürünler butonu */}
@@ -79,16 +99,20 @@ function EquipmentPage() {
               setShowAllProducts(true);
               setExpandedCategory(null); // Kategoriyi sıfırla
               setExpandedBrand(null); // Markayı sıfırla
+              setIsSidebarOpen(false); // Sidebar'ı kapat
             }}
             className="category"
           >
-            Tüm Ürünler
+            Tüm Ekipmanlar
           </h3>
 
           {Object.entries(categories).map(([categoryId, category]) => (
             <div key={categoryId}>
               <h3
-                onClick={() => toggleExpandCategory(categoryId)}
+                onClick={() => {
+                  toggleExpandCategory(categoryId);
+                  setIsSidebarOpen(true); // Sidebar açık kalsın
+                }}
                 className="category"
               >
                 {category.name}
@@ -99,7 +123,10 @@ function EquipmentPage() {
                     Object.entries(category.brands).map(([brandId, brand]) => (
                       <div key={brandId}>
                         <h4
-                          onClick={() => toggleExpandBrand(brandId)}
+                          onClick={() => {
+                            toggleExpandBrand(brandId);
+                            setIsSidebarOpen(false); // Sidebar kapalı kalsın
+                          }}
                           className="brand"
                         >
                           {brand.name}
@@ -117,13 +144,13 @@ function EquipmentPage() {
 
         <div className="product-display">
           {/* Ürünlerin grid şeklinde gösterileceği alan */}
-          <h2>Ürünler</h2>
+          <h2>Ekipmanlar</h2>
 
           {showAllProducts ? (
             // Tüm Ürünler butonuna tıklanmışsa veya sayfa ilk yüklendiğinde tüm ürünleri göster
             <div className="product-grid">
               {getAllProducts().map(([productId, product]) => (
-                <div key={productId} className="product-card">
+                <div key={productId} className="product-card" onClick={() => setIsSidebarOpen(false)}>
                   <img
                     src={product.image}
                     alt={product.name}
@@ -138,7 +165,7 @@ function EquipmentPage() {
             <div className="product-grid">
               {getAllProductsForCategory(categories[expandedCategory]).map(
                 ([productId, product]) => (
-                  <div key={productId} className="product-card">
+                  <div key={productId} className="product-card" onClick={() => setIsSidebarOpen(false)}>
                     <img
                       src={product.image}
                       alt={product.name}
@@ -156,7 +183,7 @@ function EquipmentPage() {
               {Object.entries(
                 categories[expandedCategory].brands[expandedBrand].products
               ).map(([productId, product]) => (
-                <div key={productId} className="product-card">
+                <div key={productId} className="product-card" onClick={() => setIsSidebarOpen(false)}>
                   <img
                     src={product.image}
                     alt={product.name}

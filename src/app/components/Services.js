@@ -13,19 +13,19 @@ function Services() {
             </div>
             <div className="servicesBox">
                 <Link href="/education" className='servicesImage' style={{ backgroundImage: `url(${latte.src})`, textAlign: "center" }}>
-                    <span style={{ marginBottom: "200px" }}>Eğitim</span>
+                    <p style={{ marginBottom: "200px", backgroundColor: "rgba(0,0,0,0.5)", padding: "30px" }}>Eğitim</p>
                     <br />
                     <br />
                     <br />
                 </Link>
                 <Link href="/consultancy" className='servicesImage' style={{ backgroundImage: `url(${danisman.src})` }}>
-                    <span>Danışmanlık</span>
+                    <p style={{ marginBottom: "200px", backgroundColor: "rgba(0,0,0,0.5)", padding: "30px" }}>Danışmanlık</p>
                     <br />
                     <br />
                     <br />
                 </Link>
                 <Link href="/architectureSupport" className='servicesImage' style={{ backgroundImage: `url(${architect.src})` }}>
-                    <span>Mimari Destek</span>
+                    <p style={{ marginBottom: "200px", backgroundColor: "rgba(0,0,0,0.5)", padding: "30px" }}>Mimari Destek</p>
                     <br />
                     <br />
                     <br />

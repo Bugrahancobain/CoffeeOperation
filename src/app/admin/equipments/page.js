@@ -6,6 +6,7 @@ import "./Euqipments.css";
 import Footer from '@/app/components/Footer';
 import AdminNavbar from '../adminComponent/AdminNavbar';
 import "../styles/AdminPanel.css";
+import { useAuthRedirect } from "../userCheck";
 
 function AdminEquipmentPage() {
     const [categories, setCategories] = useState({});
@@ -22,9 +23,7 @@ function AdminEquipmentPage() {
     const [editingCategory, setEditingCategory] = useState(null);
     const [editingBrand, setEditingBrand] = useState(null);
     const [editedBrandName, setEditedBrandName] = useState('');
-
-
-    
+    const { user, loading } = useAuthRedirect();
 
     useEffect(() => {
         const categoriesRef = ref(database, 'categories');
@@ -40,6 +39,14 @@ function AdminEquipmentPage() {
 
         return () => unsubscribe();
     }, []);
+
+    if (loading) {
+        return <p>Yükleniyor...</p>; // Kullanıcı doğrulama sırasında yükleniyor ekranı gösterin
+    }
+
+    if (!user) {
+        return null; // Eğer kullanıcı doğrulanmadıysa hiçbir şey göstermeyin (zaten yönlendiriliyor)
+    }
 
     // Kategori Ekleme
     const addCategory = () => {
@@ -149,6 +156,7 @@ function AdminEquipmentPage() {
                         <div className="add-category">
                             <h2>Yeni Kategori Ekle</h2>
                             <input
+                                style={{ borderRadius: "4px" }}
                                 type="text"
                                 value={newCategory}
                                 onChange={(e) => setNewCategory(e.target.value)}
@@ -166,6 +174,7 @@ function AdminEquipmentPage() {
                                         {editingCategory === categoryId ? (
                                             <div>
                                                 <input
+                                                    style={{ borderRadius: "4px" }}
                                                     type="text"
                                                     value={editedCategoryName}
                                                     onChange={(e) => setEditedCategoryName(e.target.value)}
@@ -191,6 +200,7 @@ function AdminEquipmentPage() {
                                                             {editingBrand === brandId ? (
                                                                 <div>
                                                                     <input
+                                                                        style={{ borderRadius: "4px" }}
                                                                         type="text"
                                                                         value={editedBrandName}
                                                                         onChange={(e) => setEditedBrandName(e.target.value)}
@@ -211,6 +221,7 @@ function AdminEquipmentPage() {
                                                     : <p>Bu kategoride marka yok.</p>}
                                                 <div className="add-brand">
                                                     <input
+                                                        style={{ borderRadius: "4px" }}
                                                         type="text"
                                                         value={newBrand}
                                                         onChange={(e) => setNewBrand(e.target.value)}
@@ -228,12 +239,14 @@ function AdminEquipmentPage() {
                         <div className="add-product">
                             <h2>Yeni Ürün Ekle</h2>
                             <input
+                                style={{ borderRadius: "4px" }}
                                 type="text"
                                 value={newProductName}
                                 onChange={(e) => setNewProductName(e.target.value)}
                                 placeholder="Ürün Adı"
                             />
                             <input
+                                style={{ borderRadius: "4px" }}
                                 type="text"
                                 value={newProductImage}
                                 onChange={(e) => setNewProductImage(e.target.value)}
@@ -251,12 +264,14 @@ function AdminEquipmentPage() {
                                             {editProductId === productId ? (
                                                 <div>
                                                     <input
+                                                        style={{ borderRadius: "4px" }}
                                                         type="text"
                                                         value={editedProductName}
                                                         onChange={(e) => setEditedProductName(e.target.value)}
                                                         placeholder="Ürün Adını Düzenle"
                                                     />
                                                     <input
+                                                        style={{ borderRadius: "4px" }}
                                                         type="text"
                                                         value={editedProductImage}
                                                         onChange={(e) => setEditedProductImage(e.target.value)}

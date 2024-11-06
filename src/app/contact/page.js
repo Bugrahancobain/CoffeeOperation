@@ -40,7 +40,7 @@ function page() {
     };
     return (
         <div>
-            <div className='contactMain' style={{ marginTop: 0 }}>
+            <div className='contactPageMain' style={{ marginTop: 0 }}>
                 <div className='contactText'>
                     <h1>Bize Ulaşın</h1>
                     <p>Nitelikli kahve ile ilgili her türlü konuda bize ulaşabilirsiniz.</p>
@@ -52,31 +52,36 @@ function page() {
                         <div className='contactDiv'>
                             <div className='contactContext'>
                                 <label htmlFor="name">İsim*</label>
-                                <input type="text" id="name" name="name" required />
+                                <input
+                                    style={{ borderRadius: "4px" }} type="text" id="name" name="name" required />
                             </div>
                             <div className='contactContext'>
                                 <label htmlFor="surname">Soyisim*</label>
-                                <input type="text" id="surname" name="surname" required />
+                                <input
+                                    style={{ borderRadius: "4px" }} type="text" id="surname" name="surname" required />
                             </div>
                         </div>
                         <div className='contactDiv'>
                             <div className='contactContext'>
                                 <label htmlFor="email">E-Posta*</label>
-                                <input type="email" id="email" name="email" required />
+                                <input
+                                    style={{ borderRadius: "4px" }} type="email" id="email" name="email" required />
                             </div>
                             <div className='contactContext'>
                                 <label htmlFor="phone">Telefon*</label>
-                                <input type="tel" id="phone" name="phone" required />
+                                <input
+                                    style={{ borderRadius: "4px" }} type="tel" id="phone" name="phone" required />
                             </div>
                         </div>
                         <div className='contactDivv'>
                             <div className='contactContext'>
                                 <label htmlFor="subject">Konu*</label>
-                                <input type="text" id="subject" name="subject" required />
+                                <input
+                                    style={{ borderRadius: "4px" }} type="text" id="subject" name="subject" required />
                             </div>
                             <div className='contactContext'>
                                 <label htmlFor="message">Mesajınız*</label>
-                                <textarea placeholder='Mesajınızı Buraya Yazabilirsiniz.' id="message" name="message" required></textarea>
+                                <textarea style={{ borderRadius: "4px" }} placeholder='Mesajınızı Buraya Yazabilirsiniz.' id="message" name="message" required></textarea>
                             </div>
                         </div>
                         <div className='contactBtnDiv'>

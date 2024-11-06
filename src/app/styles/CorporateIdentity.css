@@ -31,3 +31,9 @@
 .corporate-identity p {
     margin-bottom: 15px; /* Paragraf alt boşluğu */
 }
+
+@media (max-width:480px){
+    .corporate-identity {
+        width: 90% !important;
+    }
+  }

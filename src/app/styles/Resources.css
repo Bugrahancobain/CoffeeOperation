@@ -1,64 +1,98 @@
-.resourcesPage{
-    display: flex;
+.resourcesPage {
+  display: flex;
 }
 
-.resourcesPageMain{
-    background-color: rgba(69,104,61,255);
-    height: 120vh;
-    width: 100vw;
-    display: flex;
+.resourcesPageMain {
+  background-color: rgba(69, 104, 61, 255);
+  height: 120vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5% 5%;
+  color: white;
+}
+.resourcesPageContext input {
+  min-width: 200px;
+}
+
+.resourcesPageContext textarea {
+  min-width: 200px;
+}
+
+.resourcesPageText h1,
+.resourcesPageText p {
+  margin: 10px;
+}
+
+#resourcesPageForm,
+.resourcesPageForm {
+  height: max-content;
+}
+
+.resourcesPageDiv {
+  display: flex;
+}
+
+.resourcesPageContext {
+  display: flex;
+  flex-direction: column;
+}
+
+.resourcesPageContext input,
+.resourcesPageContext label {
+  height: 30px;
+  margin: 10px;
+}
+
+.resourcesPageContext textarea {
+  height: 75px;
+  padding: 10px;
+  resize: none;
+  font-size: 12px;
+  margin: 10px;
+}
+
+.resourcesPageBtnDiv {
+  text-align: center;
+}
+
+.resourcesPageBtn {
+  background-color: #cd7c36;
+  color: white;
+  width: 150px;
+  border: none;
+  padding: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media (max-width:1024px){
+  .resourcesPage{
     flex-direction: column;
-    justify-content: space-between;
-    padding: 5% 5%;
-    color: white;
-}
-.resourcesPageContext input{
-    min-width: 200px;
-}
+  }
 
-.resourcesPageContext textarea{
-    min-width: 200px;
-}
-
-.resourcesPageText h1, .resourcesPageText p{
-    margin: 10px;
-}
-
-#resourcesPageForm, .resourcesPageForm{
+  .resourcesPageMain{
+    justify-content:flex-start;
     height: max-content;
+    align-items: center;
+  }
 }
 
-.resourcesPageDiv{
-    display: flex;
-}
-
-.resourcesPageContext{
-    display: flex;
-    flex-direction: column;
-}
-
-.resourcesPageContext input, .resourcesPageContext label{
-    height: 30px;
-    margin: 10px;
-}
-
-.resourcesPageContext textarea{
-    height: 75px;
-    padding: 10px;
-    resize: none;
-    font-size: 12px;
-    margin: 10px;
-}
-
-.resourcesPageBtnDiv{
+@media (max-width:480px){
+  .resourcesPage{
     text-align: center;
-}
-
-.resourcesPageBtn{
-    background-color: rgba(254,231,174,255);
-    width: 150px;
-    border: none;
-    padding: 15px;
-    border-radius: 12px;
-    cursor: pointer;
+    align-items: center;
+  }
+  .resourcesPageMain{
+    width: 100%;
+  }
+  .resourcesPageForm{
+    width: 90%;
+  }
+  .resourcesPageDiv{
+    flex-direction: column;
+  }
 }

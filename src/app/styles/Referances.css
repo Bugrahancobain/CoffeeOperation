@@ -19,15 +19,16 @@
 .referancesImage {
     position: relative;
     margin-top: 50px;
-    height: 30vh;
+    height: 300px;
     width: 100%; /* Genişlik grid hücresine uyacak şekilde %100 yapıldı */
     padding-top: 10%;
     font-size: 25px;
-    object-fit: cover;
-    background-size: cover;
+    object-fit: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     background-position: center;
     color: white;
-    border-radius: 24px;
+    border-radius: 8px;
     transition: 0.3s ease;
     cursor: pointer;
 }
@@ -42,12 +43,12 @@
     background-color: rgba(0, 0, 0, 0.5);
     opacity: 0;
     transition: opacity 0.3s ease;
-    border-radius: 24px;
+    border-radius: 8px;
 }
 
 .referancesImage:hover::before {
     opacity: 1;
-    border-radius: 24px;
+    border-radius: 8px;
 }
 
 .referancesLinkButtonDiv {
@@ -64,7 +65,7 @@
     font-size: 24px;
     border: none;
     text-decoration: none;
-    border-radius: 16px;
+    border-radius: 8px;
 }
 
 .instagramIcon {

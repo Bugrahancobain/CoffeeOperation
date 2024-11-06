@@ -1,6 +1,7 @@
 .blog {
     text-align: center;
     margin: 50px 0 0 0;
+    min-height: 100vh;
 }
 
 .blogBox {
@@ -20,7 +21,7 @@
     background-size: cover;
     background-position: center;
     color: white;
-    border-radius: 24px;
+    border-radius: 8px;
     transition: 0.3s ease;
     cursor: pointer;
 }
@@ -36,13 +37,13 @@
     background-color: rgba(0, 0, 0, 0.5); 
     opacity: 0; 
     transition: opacity 0.3s ease; 
-    border-radius: 24px;
+    border-radius: 8px;
 }
 
 /* Hover olduğunda karartma efekti */
 .blogImage:hover::before {
     opacity: 1; 
-    border-radius: 24px;
+    border-radius: 8px;
 }
 
 /* Metin stilini korumak için metni konumlandırın */
@@ -72,3 +73,30 @@
     text-decoration: none;
     border-radius: 16px;
 }
+
+@media (max-width:1024px){
+    .blog{
+        display: flex;
+        flex-direction: column;
+        justify-content: baseline;
+        min-height: 100vh;
+    }
+    
+    .blogImage{
+        height: 30vh;
+        width: 70%;
+    }
+}
+
+@media (max-width:480px){
+    .blog{
+        align-items: center;
+        text-align: center;
+    }
+    .blogBox{
+        text-align: center;
+        align-items: center;
+        width: max-content;
+    }
+    .blogImage{width: 100%;}
+  }

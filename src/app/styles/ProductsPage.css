@@ -12,6 +12,7 @@
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     height: 100vh;
     overflow-y: auto; /* İçerik fazla olursa kaydırma sağlar */
+    transform: translateX(0);
 }
 
 .sidebar h2 {
@@ -65,6 +66,7 @@
     padding: 20px;
     background-color: #fff;
     overflow-y: auto; /* Ürünler çok olursa kaydırma sağlar */
+    min-height: 100vh;
 }
 
 .product-display h2 {
@@ -111,6 +113,9 @@
     font-size: 16px;
     color: #333;
 }
+.hamburger-menu {
+    display: none;
+  }
 
 /* Responsive tasarım */
 @media (max-width: 768px) {
@@ -129,16 +134,32 @@
 }
 
 @media (max-width: 480px) {
-    .sidebar {
-        width: 180px;
-    }
+    .hamburger-menu {
+        display: block;
+        margin: 10px 0 0 10px;
+      font-size: 30px;
 
-    .product-card {
-        width: 160px;
-        height: 200px;
-    }
-
-    .product-card img {
-        height: 120px;
-    }
+      }
+    
+      .sidebar {
+        transform: translateX(-100%);
+        position: absolute;
+        top: 113;
+        left: 0;
+        height: 100%;
+        z-index: 999; /* Sidebar üstte gözüksün */
+        transition: all  0.3s ease-out;
+      }
+    
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .sidebar.active{
+        transition: all 0.3s ease-out;
+      }
+      .product-grid{
+        margin: auto;
+        justify-items: center
+      }
+      
 }
